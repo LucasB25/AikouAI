@@ -87,10 +87,6 @@ Thank you for your interest in contributing to Midjourney! Here are some guideli
 
 Your contribution will be reviewed by the project maintainers, and any necessary feedback or changes will be discussed with you. We appreciate your help in making Midjourney better!
 
-## 🔐 License
-
-Distributed under the GPL-3.0 license. See ![LICENSE](https://img.shields.io/github/license/LucasB25/Midjourney?style=social) for more information.
-
 ## 👥 Contributors
 
 Thanks goes to these wonderful people :
