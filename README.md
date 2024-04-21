@@ -7,8 +7,8 @@
 [![Issues][issues-shield]][issues-url]
 [![Support Server][support-shield]][support-server]
 [![MIT License][license-shield]][license-url]
-[![Run on Repl.it](https://repl.it/badge/github/lucasb25/Midjourney)](https://repl.it/github/lucasb25/Midjourney)
-[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/lucasb25/Midjourney)
+[![Run on Repl.it](https://repl.it/badge/github/LucasB25/Midjourney)](https://repl.it/github/LucasB25/Midjourney)
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/LucasB25/Midjourney)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -20,7 +20,7 @@
     <br />
         <a href="https://discord.gg/AhUJa2kdAr">Serveur Support</a>
     ·
-    <a href="https://github.com/lucasb25/Midjourney/issues">Report Bug & Request Feature</a>
+    <a href="https://github.com/LucasB25/Midjourney/issues">Report Bug & Request Feature</a>
   </p>
 </p>
 
@@ -41,7 +41,7 @@ A Discord Bot that can generate text based on a given prompt using [Replicate](h
 1. Clone the Midjourney repository:
 
 ```bash
-git clone https://github.com/lucasb25/Midjourney.git
+git clone https://github.com/LucasB25/Midjourney.git
 ```
 
 2. change the directory to Midjourney
@@ -59,7 +59,7 @@ npm i
 4. Set up your environment variables:
 
 Create a `.env` file in the root directory of your project with the following variables:
-or you can use the [.env.example](https://raw.githubusercontent.com/lucasb25/Midjourney/main/.env.example) file
+or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/Midjourney/main/.env.example) file
 
 ```bash
 TOKEN= #Discord Bot Token
@@ -89,26 +89,26 @@ Your contribution will be reviewed by the project maintainers, and any necessary
 
 ## 🔐 License
 
-Distributed under the GPL-3.0 license. See ![LICENSE](https://img.shields.io/github/license/lucasb25/Midjourney?style=social) for more information.
+Distributed under the GPL-3.0 license. See ![LICENSE](https://img.shields.io/github/license/LucasB25/Midjourney?style=social) for more information.
 
 ## 👥 Contributors
 
 Thanks goes to these wonderful people :
 
-<a href="https://github.com/lucasb25/Midjourney/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=lucasb25/Midjourney" />
+<a href="https://github.com/LucasB25/Midjourney/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=LucasB25/Midjourney" />
 </a>
 
-[version-shield]: https://img.shields.io/github/package-json/v/lucasb25/Midjourney?style=for-the-badge
-[contributors-shield]: https://img.shields.io/github/contributors/lucasb25/Midjourney.svg?style=for-the-badge
-[contributors-url]: https://github.com/lucasb25/Midjourney/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/lucasb25/Midjourney.svg?style=for-the-badge
-[forks-url]: https://github.com/lucasb25/Midjourney/network/members
-[stars-shield]: https://img.shields.io/github/stars/lucasb25/Midjourney.svg?style=for-the-badge
-[stars-url]: https://github.com/lucasb25/Midjourney/stargazers
-[issues-shield]: https://img.shields.io/github/issues/lucasb25/Midjourney.svg?style=for-the-badge
-[issues-url]: https://github.com/lucasb25/Midjourney/issues
-[license-shield]: https://img.shields.io/github/license/lucasb25/Midjourney.svg?style=for-the-badge
-[license-url]: https://github.com/lucasb25/Midjourney/blob/master/LICENSE
+[version-shield]: https://img.shields.io/github/package-json/v/LucasB25/Midjourney?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/LucasB25/Midjourney.svg?style=for-the-badge
+[contributors-url]: https://github.com/LucasB25/Midjourney/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/LucasB25/Midjourney.svg?style=for-the-badge
+[forks-url]: https://github.com/LucasB25/Midjourney/network/members
+[stars-shield]: https://img.shields.io/github/stars/LucasB25/Midjourney.svg?style=for-the-badge
+[stars-url]: https://github.com/LucasB25/Midjourney/stargazers
+[issues-shield]: https://img.shields.io/github/issues/LucasB25/Midjourney.svg?style=for-the-badge
+[issues-url]: https://github.com/LucasB25/Midjourney/issues
+[license-shield]: https://img.shields.io/github/license/LucasB25/Midjourney.svg?style=for-the-badge
+[license-url]: https://github.com/LucasB25/Midjourney/blob/master/LICENSE
 [support-server]: https://discord.gg/AhUJa2kdAr
 [support-shield]: https://img.shields.io/discord/942117923001098260.svg?style=for-the-badge&logo=discord&colorB=7289DA
