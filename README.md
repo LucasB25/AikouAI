@@ -105,6 +105,6 @@ Thanks goes to these wonderful people :
 [issues-shield]: https://img.shields.io/github/issues/LucasB25/Midjourney.svg?style=for-the-badge
 [issues-url]: https://github.com/LucasB25/Midjourney/issues
 [license-shield]: https://img.shields.io/github/license/LucasB25/Midjourney.svg?style=for-the-badge
-[license-url]: https://github.com/LucasB25/Midjourney/blob/master/LICENSE
+[license-url]: https://github.com/LucasB25/Midjourney/blob/mains/LICENSE
 [support-server]: https://discord.gg/AhUJa2kdAr
 [support-shield]: https://img.shields.io/discord/942117923001098260.svg?style=for-the-badge&logo=discord&colorB=7289DA
