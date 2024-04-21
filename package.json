@@ -15,12 +15,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/lucasb25/Midjourney.git"
+        "url": "git+https://github.com/LucasB25/Midjourney.git"
     },
     "bugs": {
-        "url": "https://github.com/lucasb25/Midjourney/issues"
+        "url": "https://github.com/LucasB25/Midjourney/issues"
     },
-    "homepage": "https://github.com/lucasb25/Midjourney#readme",
+    "homepage": "https://github.com/LucasB25/Midjourney#readme",
     "devDependencies": {
         "@types/node": "^20.12.7",
         "@types/signale": "^1.4.7",
