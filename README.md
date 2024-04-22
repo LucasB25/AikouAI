@@ -92,10 +92,6 @@ Your contribution will be reviewed by the project maintainers, and any necessary
 Thanks goes to these wonderful people :
 
 <a href="https://github.com/LucasB25/Midjourney/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=LucasB25/Midjourney" />
-</a>
-
-<a href="https://github.com/LucasB25/Midjourney/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=LucasB25/Midjourney" alt="contributors" width="500" />
 </a>
 
