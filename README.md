@@ -95,6 +95,10 @@ Thanks goes to these wonderful people :
   <img src="https://contrib.rocks/image?repo=LucasB25/Midjourney" />
 </a>
 
+<a href="https://github.com/LucasB25/Midjourney/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=LucasB25/Midjourney" alt="contributors" width="500" />
+</a>
+
 [version-shield]: https://img.shields.io/github/package-json/v/LucasB25/Midjourney?style=for-the-badge
 [contributors-shield]: https://img.shields.io/github/contributors/LucasB25/Midjourney.svg?style=for-the-badge
 [contributors-url]: https://github.com/LucasB25/Midjourney/graphs/contributors
