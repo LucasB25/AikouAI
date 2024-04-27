@@ -20,7 +20,7 @@ export default class InteractionCreate extends Event {
                     'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.'
                 ) {
                     await interaction[interaction.replied ? 'editReply' : 'reply']({
-                        content: "NSFW content detected. You can' generate NSFW images!",
+                        content: 'NSFW content detected. You can\' generate NSFW images!',
                         ephemeral: true,
                     });
 

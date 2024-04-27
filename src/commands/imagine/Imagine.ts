@@ -21,7 +21,7 @@ export default class Imagine extends Command {
                 examples: ['imagine'],
             },
             descriptionLocalizations: {
-                fr: "📷 | Crée une image à partir d'un prompt",
+                fr: '📷 | Crée une image à partir d\'un prompt',
             },
             category: 'fun',
             cooldown: 3,

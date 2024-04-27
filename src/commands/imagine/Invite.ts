@@ -15,7 +15,7 @@ export default class Invite extends Command {
                 examples: ['invite'],
             },
             descriptionLocalizations: {
-                fr: "📨 | Afficher le lien d'invitation.",
+                fr: '📨 | Afficher le lien d\'invitation.',
             },
             category: 'general',
             permissions: {
