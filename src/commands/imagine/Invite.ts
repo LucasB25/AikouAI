@@ -27,7 +27,7 @@ export default class Invite extends Command {
             options: [],
         });
     }
-    async run(client: Bot, interaction: CommandInteraction) {
+    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
         await interaction.reply({
             content: `Invite me to your server with this link: [Invite](https://discord.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot%20applications.commands&permissions=8)`,
         });

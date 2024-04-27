@@ -27,7 +27,7 @@ export default class Ping extends Command {
             options: [],
         });
     }
-    async run(client: Bot, interaction: CommandInteraction) {
+    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
         await interaction.deferReply({ fetchReply: true });
         await interaction.editReply({ content: `Pinging...` }).then(async msg => {
             const ping = msg.createdTimestamp - interaction.createdTimestamp;

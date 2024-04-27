@@ -61,25 +61,36 @@ export default class Imagine extends Command {
             ],
         });
     }
-    async run(client: Bot, interaction: CommandInteraction) {
-        const prompt = interaction.options.data[0].value as string;
+    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
+        const prompt = interaction.options.get('prompt')?.value as string | undefined;
+        const negativePrompt = interaction.options.get('negative-prompt')?.value as
+            | string
+            | undefined;
+        const numOutputs =
+            (interaction.options.get('num-outputs')?.value as number | undefined) || 4;
+
+        if (!prompt) {
+            await interaction.reply({ content: 'Please provide a prompt.', ephemeral: true });
+            return;
+        }
+
         await interaction.deferReply({ fetchReply: true });
         await interaction.editReply({ content: `**${prompt}** - ${interaction.user.toString()}` });
 
         const prediction = (await client.replicate.run(this.client.config.model, {
             input: {
                 prompt: prompt,
-                num_outputs: interaction.options.data[2]
-                    ? (interaction.options.data[2].value as number)
-                    : 4,
-                negative_prompt: interaction.options.data[1]?.value as string,
+                num_outputs: numOutputs,
+                negative_prompt: negativePrompt,
             },
         })) as any[];
+
         const rowImg = await client.canvas.mergeImages({
             width: 1000,
             height: 1000,
             images: prediction,
         });
+
         const attachment = new AttachmentBuilder(rowImg).setName('imagine.png');
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
             ...prediction.map((_, i) =>

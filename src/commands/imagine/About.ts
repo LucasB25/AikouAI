@@ -33,7 +33,7 @@ export default class About extends Command {
             options: [],
         });
     }
-    async run(client: Bot, interaction: CommandInteraction) {
+    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
         const row = new ActionRowBuilder<ButtonBuilder>()
             .addComponents(
                 new ButtonBuilder()

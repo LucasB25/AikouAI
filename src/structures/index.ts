@@ -4,6 +4,4 @@ import Bot from './Client.js';
 import Command from './Command.js';
 import Event from './Event.js';
 
-const EventsTypes = Events;
-
-export { Bot, Event, Command, EventsTypes };
+export { Bot, Event, Command, Events as EventsTypes };

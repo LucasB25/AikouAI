@@ -1,6 +1,4 @@
-import * as dotenv from 'dotenv';
-
-dotenv.config();
+import 'dotenv/config';
 
 export default {
     token: process.env.TOKEN,
