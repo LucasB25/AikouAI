@@ -26,31 +26,26 @@ export default class Bot extends Client {
     public commands = new Collection<string, any>();
     private data: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
     public replicate: Replicate | null = null;
-    public canvas: Canvas = new Canvas();
+    public canvas = new Canvas();
 
     constructor(options: ClientOptions) {
         super(options);
         this.config = config;
     }
 
-    public async start(token: string) {
-        this.logger.start('Starting bot...');
-        if (!config.replicateToken) {
-            this.logger.error('Replicate token is missing.');
-            return;
+    public async start(token: string): Promise<void> {
+        try {
+            this.logger.start('Starting bot...');
+            if (!config.replicateToken) throw new Error('Replicate token is missing.');
+            this.replicate = new Replicate({ auth: config.replicateToken });
+            if (!this.replicate) throw new Error('Failed to initialize Replicate.');
+            this.logger.info('Replicate is initialized.');
+            await this.loadCommands();
+            await this.loadEvents();
+            await this.login(token);
+        } catch (error) {
+            this.logger.error(error);
         }
-        this.replicate = new Replicate({
-            auth: config.replicateToken,
-        });
-        if (!this.replicate) {
-            this.logger.error('Failed to initialize Replicate.');
-            return;
-        }
-        this.logger.info('Replicate is initialized.');
-
-        await this.loadCommands();
-        await this.loadEvents();
-        await this.login(token);
     }
 
     public embed(): EmbedBuilder {
@@ -66,7 +61,7 @@ export default class Bot extends Client {
             for (const file of eventFiles) {
                 const eventFile = (await import(`../events/${event}/${file}`)).default;
                 const eventClass = new eventFile(this, file);
-                this.on(eventClass.name, (...args: any[]) => eventClass.run(...args));
+                this.on(eventClass.name, (...args: unknown[]) => eventClass.run(...args));
             }
         }
     }
@@ -103,9 +98,9 @@ export default class Bot extends Client {
         }
 
         this.once('ready', async () => {
-            const applicationCommands = Routes.applicationCommands(this.config.clientId ?? '');
+            const applicationCommands = Routes.applicationCommands(config.clientId ?? '');
             try {
-                const rest = new REST({ version: '10' }).setToken(this.config.token ?? '');
+                const rest = new REST({ version: '10' }).setToken(config.token ?? '');
                 await rest.put(applicationCommands, { body: this.data });
                 this.logger.info(`Successfully loaded slash commands!`);
             } catch (error) {

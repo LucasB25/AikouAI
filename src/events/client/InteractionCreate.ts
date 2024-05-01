@@ -15,10 +15,7 @@ export default class InteractionCreate extends Event {
             try {
                 await command.run(this.client, interaction);
             } catch (error) {
-                if (
-                    error.message ===
-                    'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.'
-                ) {
+                if (error instanceof Error && error.message === 'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.') {
                     await interaction[interaction.replied ? 'editReply' : 'reply']({
                         content: 'NSFW content detected. You can\' generate NSFW images!',
                         ephemeral: true,
@@ -26,13 +23,16 @@ export default class InteractionCreate extends Event {
 
                     return;
                 }
+                if (error instanceof Error) {
+                    this.client.logger.error(error);
 
-                this.client.logger.error(error);
-
-                await interaction[interaction.replied ? 'editReply' : 'reply']({
-                    content: 'There was an error while executing this command!',
-                    ephemeral: true,
-                });
+                    await interaction[interaction.replied ? 'editReply' : 'reply']({
+                        content: 'There was an error while executing this command!',
+                        ephemeral: true,
+                    });
+                } else {
+                    console.error('An unexpected error occurred:', error);
+                }
             }
         }
     }

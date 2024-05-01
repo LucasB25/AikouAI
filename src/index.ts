@@ -16,7 +16,11 @@ const client = new Bot(clientOptions);
 
 client.start(config.token);
 
-process.on('unhandledRejection', (error: Error) => client.logger.error(error));
-process.on('uncaughtException', (error: Error) => client.logger.error(error));
-process.on('warning', (warning: Error) => client.logger.warn(warning));
-process.on('exit', () => client.logger.warn('Process exited!'));
+function setupEventListeners(): void {
+    process.on('unhandledRejection', (error: Error) => client.logger.error(error));
+    process.on('uncaughtException', (error: Error) => client.logger.error(error));
+    process.on('warning', (warning: Error) => client.logger.warn(warning));
+    process.on('exit', () => client.logger.warn('Process exited!'));
+}
+
+setupEventListeners();

@@ -1,12 +1,13 @@
 {
     "name": "midjourney",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "A simple midjourney bot for discord",
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
         "start": "npm run build && node dist/index.js",
-        "clean": "rm -rf dist",
+        "cleanw": "rmdir /s /q dist",
+        "cleanl": "rm -rf dist",
         "build": "tsc --project tsconfig.json",
         "lint": "eslint . --cache --ext .js,.jsx,.ts,.tsx",
         "lint:fix": "eslint . --fix --cache --ext .js,.jsx,.ts,.tsx",
@@ -25,9 +26,9 @@
         "@types/node": "^20.12.7",
         "@types/signale": "^1.4.7",
         "ts-node": "^10.9.2",
-        "@typescript-eslint/eslint-plugin": "^7.7.1",
-        "@typescript-eslint/parser": "^7.7.1",
-        "eslint": "^8.56.0",
+        "@typescript-eslint/eslint-plugin": "^7.8.0",
+        "@typescript-eslint/parser": "^7.8.0",
+        "eslint": "^8.57.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-unicorn": "^52.0.0",
         "prettier": "^3.2.5"
@@ -49,7 +50,7 @@
         "discord.js": "^14.14.1",
         "replicate": "^0.29.1",
         "signale": "^1.4.0",
-        "undici": "^6.14.0",
+        "undici": "^6.15.0",
         "dotenv": "^16.4.5"
     }
 }

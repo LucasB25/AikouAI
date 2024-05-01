@@ -3,31 +3,23 @@ import { ApplicationCommandOption, PermissionResolvable } from 'discord.js';
 import { Bot } from './index.js';
 
 interface CommandDescription {
-    content: string | null;
-    usage: string | null;
-    examples: string[] | null;
+    content: string;
+    usage: string;
+    examples: string[];
 }
 
 interface CommandOptions {
     name: string;
-    nameLocalizations?: any;
+    nameLocalizations?: Record<string, string>;
     description?: CommandDescription;
-    descriptionLocalizations?: any;
+    descriptionLocalizations?: Record<string, string>;
     aliases?: string[];
     cooldown?: number;
-    args?: boolean;
-    player?: {
-        voice: boolean;
-        dj: boolean;
-        active: boolean;
-        djPerm: string | null;
-    };
     permissions?: {
         dev: boolean;
         client: string[] | PermissionResolvable;
         user: string[] | PermissionResolvable;
     };
-    slashCommand?: boolean;
     options?: ApplicationCommandOption[];
     category?: string;
 }
@@ -35,9 +27,9 @@ interface CommandOptions {
 export default class Command {
     public client: Bot;
     public name: string;
-    public nameLocalizations: any;
+    public nameLocalizations: Record<string, string>;
     public description: CommandDescription;
-    public descriptionLocalizations: any;
+    public descriptionLocalizations: Record<string, string> | null;
     public cooldown: number;
     public permissions: {
         dev: boolean;
@@ -45,7 +37,7 @@ export default class Command {
         user: string[] | PermissionResolvable;
     };
     public options: ApplicationCommandOption[];
-    public category: string | null;
+    public category: string;
 
     constructor(client: Bot, options: CommandOptions) {
         this.client = client;
@@ -67,7 +59,7 @@ export default class Command {
         this.category = options.category || 'general';
     }
 
-    public async run(client: Bot, message: any): Promise<any> {
+    public async run(_client: Bot, _message: any): Promise<any> {
         return await Promise.resolve();
     }
 }

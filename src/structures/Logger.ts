@@ -1,42 +1,52 @@
 import pkg from 'signale';
 const { Signale } = pkg;
 
+enum LogLevel {
+    INFO = 'info',
+    WARN = 'warn',
+    ERROR = 'error',
+    DEBUG = 'debug',
+    SUCCESS = 'success',
+    LOG = 'log',
+    PAUSE = 'pause',
+    START = 'start',
+}
+
 interface LoggerOptions {
     disabled?: boolean;
     interactive?: boolean;
-    logLevel?: string;
+    logLevel?: LogLevel;
     scope?: string;
-    types?: {
-        info: { badge: string; color: string; label: string };
-        warn: { badge: string; color: string; label: string };
-        error: { badge: string; color: string; label: string };
-        debug: { badge: string; color: string; label: string };
-        success: { badge: string; color: string; label: string };
-        log: { badge: string; color: string; label: string };
-        pause: { badge: string; color: string; label: string };
-        start: { badge: string; color: string; label: string };
-    };
+    types?: Record<LogLevel, { badge: string; color: string; label: string }>;
 }
 
 const defaultOptions: LoggerOptions = {
     disabled: false,
     interactive: false,
-    logLevel: 'info',
+    logLevel: LogLevel.INFO,
     scope: 'Midjourney',
     types: {
-        info: { badge: 'ℹ', color: 'blue', label: 'info' },
-        warn: { badge: '⚠', color: 'yellow', label: 'warn' },
-        error: { badge: '✖', color: 'red', label: 'error' },
-        debug: { badge: '🐛', color: 'magenta', label: 'debug' },
-        success: { badge: '✔', color: 'green', label: 'success' },
-        log: { badge: '📝', color: 'white', label: 'log' },
-        pause: { badge: '⏸', color: 'yellow', label: 'pause' },
-        start: { badge: '▶', color: 'green', label: 'start' },
+        [LogLevel.INFO]: { badge: 'ℹ', color: 'blue', label: 'info' },
+        [LogLevel.WARN]: { badge: '⚠', color: 'yellow', label: 'warn' },
+        [LogLevel.ERROR]: { badge: '✖', color: 'red', label: 'error' },
+        [LogLevel.DEBUG]: { badge: '🐛', color: 'magenta', label: 'debug' },
+        [LogLevel.SUCCESS]: { badge: '✔', color: 'green', label: 'success' },
+        [LogLevel.LOG]: { badge: '📝', color: 'white', label: 'log' },
+        [LogLevel.PAUSE]: { badge: '⏸', color: 'yellow', label: 'pause' },
+        [LogLevel.START]: { badge: '▶', color: 'green', label: 'start' },
     },
 };
 
 export default class Logger extends Signale {
     constructor(options: LoggerOptions = {}) {
         super({ ...defaultOptions, ...options });
+        this.validateOptions(options);
+    }
+
+    private validateOptions(options: LoggerOptions): void {
+        const validLogLevels = Object.values(LogLevel);
+        if (options.logLevel && !validLogLevels.includes(options.logLevel)) {
+            throw new Error(`Invalid log level: ${options.logLevel}`);
+        }
     }
 }

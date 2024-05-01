@@ -20,7 +20,7 @@ export default class Event {
         this.fileName = file.split('.')[0];
     }
 
-    public async run(...args: any[]): Promise<void> {
+    public async run(..._args: unknown[]): Promise<void> {
         return await Promise.resolve();
     }
 }
