@@ -77,7 +77,7 @@ export default class Imagine extends Command {
         await interaction.deferReply({ fetchReply: true });
         await interaction.editReply({ content: `**${prompt}** - ${interaction.user.toString()}` });
 
-        const prediction = (await client.replicate.run(this.client.config.model, {
+        const prediction = (await client.replicate.run(this.client.config.replicateModel, {
             input: {
                 prompt: prompt,
                 num_outputs: numOutputs,
