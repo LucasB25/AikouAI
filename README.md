@@ -63,8 +63,8 @@ or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/Mid
 
 ```bash
 TOKEN= #Discord Bot Token
-CLIENT_ID=1109838882805125190 #Discord Bot Client ID
-COLOR=#00ff00,
+CLIENT_ID= #Discord Bot Client ID
+COLOR=#00ff00
 REPLICATE_TOKEN= #Replicate Token from https://replicate.com/signin
 MODEL=bytedance/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ffefea21465756a6ce24b7ea4165eba6a
 ```
