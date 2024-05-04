@@ -1,3 +1,4 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import {
     ApplicationCommandType,
     Client,
@@ -27,6 +28,7 @@ export default class Bot extends Client {
     private data: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
     public replicate: Replicate | null = null;
     public canvas = new Canvas();
+    public genAI: GoogleGenerativeAI | null = null;
 
     constructor(options: ClientOptions) {
         super(options);
@@ -40,6 +42,12 @@ export default class Bot extends Client {
             this.replicate = new Replicate({ auth: config.replicateToken });
             if (!this.replicate) throw new Error('Failed to initialize Replicate.');
             this.logger.info('Replicate is initialized.');
+
+            // if (!config.googleKey) throw new Error('Google key is missing.');
+            // this.genAI = new GoogleGenerativeAI(config.googleKey);
+            // if (!this.genAI) throw new Error('Failed to initialize GoogleGenerativeAI.');
+            // this.logger.info('GoogleGenerativeAI is initialized.');
+
             await this.loadCommands();
             await this.loadEvents();
             await this.login(token);

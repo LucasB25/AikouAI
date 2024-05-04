@@ -100,7 +100,13 @@ export default class Imagine extends Command {
                     .setURL(prediction[i])
             )
         );
+        const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents(
+            new ButtonBuilder()
+                .setLabel(`Support`)
+                .setStyle(ButtonStyle.Link)
+                .setURL('https://discord.gg/JeaQTqzsJw')
+        );
 
-        await interaction.editReply({ files: [attachment], components: [row] });
+        await interaction.editReply({ files: [attachment], components: [row, row2] });
     }
 }

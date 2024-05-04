@@ -37,7 +37,7 @@ export default class About extends Command {
         const row = new ActionRowBuilder<ButtonBuilder>()
             .addComponents(
                 new ButtonBuilder()
-                    .setLabel('Invite midjourney')
+                    .setLabel('Invite AikouBot')
                     .setURL(
                         `https://discord.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot%20applications.commands&permissions=8`
                     )
@@ -52,10 +52,8 @@ export default class About extends Command {
 
         const embed = new EmbedBuilder()
             .setAuthor({
-                name: 'Midjourney',
-                iconURL: 'https://c.clc2l.com/t/M/i/Midjourney-96BXbL.png',
+                name: 'AikouBot',
             })
-            .setThumbnail('https://c.clc2l.com/t/M/i/Midjourney-96BXbL.png')
             .addFields([
                 {
                     name: 'Creator',
@@ -64,7 +62,7 @@ export default class About extends Command {
                 },
                 {
                     name: 'Repository',
-                    value: '[Here](https://github.com/lucasb25/Midjourney)',
+                    value: '[Here](https://github.com/lucasb25/AikouBot)',
                     inline: true,
                 },
                 {

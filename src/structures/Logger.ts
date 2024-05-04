@@ -24,7 +24,7 @@ const defaultOptions: LoggerOptions = {
     disabled: false,
     interactive: false,
     logLevel: LogLevel.INFO,
-    scope: 'Midjourney',
+    scope: 'AikouBot',
     types: {
         [LogLevel.INFO]: { badge: 'ℹ', color: 'blue', label: 'info' },
         [LogLevel.WARN]: { badge: '⚠', color: 'yellow', label: 'warn' },

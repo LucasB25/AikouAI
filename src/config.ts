@@ -9,5 +9,4 @@ export default {
 
     googleKey: process.env.GOOGLE_KEY,
     googleModel: process.env.GOOGLE_MODEL as any,
-    proxy: process.env.LOCAL_FETCH_PROXY as any,
 };
