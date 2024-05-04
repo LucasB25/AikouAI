@@ -69,6 +69,9 @@ CLIENT_ID= #Discord Bot Client ID
 COLOR=#00ff00
 REPLICATE_TOKEN= #Replicate Token from https://replicate.com/signin
 REPLICATE_MODEL=bytedance/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ffefea21465756a6ce24b7ea4165eba6a
+
+GOOGLE_KEY= #Google key from https://makersuite.google.com/
+GOOGLE_MODEL=gemini-1.5-pro-latest
 ```
 
 5. Run the bot:
