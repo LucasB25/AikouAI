@@ -59,7 +59,7 @@ export default class MessageCreate extends Event {
 
                     await thread.send(generatedText);
                 } catch (error) {
-                    console.error('An error occurred while generating the response:', error);
+                    throw new Error(`An error occurred while generating the response: ${error}`);
                 }
             }
         }

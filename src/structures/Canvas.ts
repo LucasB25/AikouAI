@@ -11,7 +11,7 @@ interface MergeImagesOptions {
 export class Canvas {
     public async mergeImages(options: MergeImagesOptions): Promise<Buffer> {
         try {
-            const { width, height, images } = options; // Destructuring options
+            const { width, height, images } = options;
             const imageCount = images.length;
             const rows = Math.ceil(Math.sqrt(imageCount));
             const cols = Math.ceil(imageCount / rows);
@@ -28,18 +28,20 @@ export class Canvas {
                             throw new Error(`Failed to fetch image: ${imageUrl}`);
                         }
                         const buffer = await response.body.arrayBuffer();
-                        const tempFilePath = `temp${index}.tmp`;
-                        await fs.writeFile(tempFilePath, Buffer.from(buffer));
-                        const image = await loadImage(tempFilePath);
+                        const tempFilePath = await fs.mkdtemp('temp');
+                        const tempFileName = `${tempFilePath}/temp${index}.tmp`;
+                        await fs.writeFile(tempFileName, Buffer.from(buffer));
+                        const image = await loadImage(tempFileName);
                         const x = (index % cols) * chunkWidth;
                         const y = Math.floor(index / cols) * chunkHeight;
                         ctx.drawImage(image, x, y, chunkWidth, chunkHeight);
-                        await fs.unlink(tempFilePath);
+                        await fs.unlink(tempFileName);
                     } catch (error) {
                         throw new Error(`Error processing image ${index}: ${error}`);
                     }
                 })
             );
+
             return canvas.toBuffer('image/png');
         } catch (error) {
             throw new Error(`Error merging images: ${error}`);

@@ -1,10 +1,4 @@
-import {
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    CommandInteraction,
-    EmbedBuilder,
-} from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction } from 'discord.js';
 
 import { Bot, Command } from '../../structures/index.js';
 
@@ -33,6 +27,7 @@ export default class About extends Command {
             options: [],
         });
     }
+
     async run(client: Bot, interaction: CommandInteraction): Promise<void> {
         const row = new ActionRowBuilder<ButtonBuilder>()
             .addComponents(
@@ -50,7 +45,9 @@ export default class About extends Command {
                     .setStyle(ButtonStyle.Link)
             );
 
-        const embed = new EmbedBuilder()
+        const embed = client
+            .embed()
+            .setColor(this.client.color)
             .setAuthor({
                 name: 'AikouBot',
             })

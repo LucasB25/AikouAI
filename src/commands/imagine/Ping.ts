@@ -28,12 +28,11 @@ export default class Ping extends Command {
         });
     }
     async run(client: Bot, interaction: CommandInteraction): Promise<void> {
-        await interaction.deferReply({ fetchReply: true });
-        await interaction.editReply({ content: `Pinging...` }).then(async msg => {
-            const ping = msg.createdTimestamp - interaction.createdTimestamp;
-            await interaction.editReply({
-                content: `Bot Latency: ${ping}ms\nAPI Latency: ${Math.round(client.ws.ping)}ms`,
-            });
-        });
+        const embed = client
+            .embed()
+            .setColor(this.client.color)
+            .setDescription(`**Pong:** \`${Math.round(client.ws.ping)}ms\``);
+
+        await interaction.reply({ embeds: [embed] });
     }
 }

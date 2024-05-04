@@ -12,11 +12,11 @@ export default class Event {
     public name: string;
     public fileName: string;
 
-    constructor(client: Bot, file: string, options: EventOptions) {
+    constructor(client: Bot, file: string, { name, one = false }: EventOptions) {
         this.client = client;
         this.file = file;
-        this.name = options.name;
-        this.one = !!options.one;
+        this.name = name;
+        this.one = one;
         this.fileName = file.split('.')[0];
     }
 

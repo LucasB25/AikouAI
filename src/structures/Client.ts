@@ -22,8 +22,9 @@ import config from '../config.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default class Bot extends Client {
-    public config: typeof config;
+    public config = config;
     public logger = new Logger();
+    public readonly color = config.color;
     public commands = new Collection<string, any>();
     private data: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
     public replicate: Replicate | null = null;
@@ -32,21 +33,25 @@ export default class Bot extends Client {
 
     constructor(options: ClientOptions) {
         super(options);
-        this.config = config;
     }
 
     public async start(token: string): Promise<void> {
         try {
             this.logger.start('Starting bot...');
-            if (!config.replicateToken) throw new Error('Replicate token is missing.');
-            this.replicate = new Replicate({ auth: config.replicateToken });
-            if (!this.replicate) throw new Error('Failed to initialize Replicate.');
-            this.logger.info('Replicate is initialized.');
+            if (this.config.replicateToken) {
+                this.replicate = new Replicate({ auth: this.config.replicateToken });
+                this.logger.info('Replicate is initialized.');
+            } else {
+                this.logger.warn('Replicate token is missing. Replicate will not be initialized.');
+            }
 
-            // if (!config.googleKey) throw new Error('Google key is missing.');
-            // this.genAI = new GoogleGenerativeAI(config.googleKey);
-            // if (!this.genAI) throw new Error('Failed to initialize GoogleGenerativeAI.');
-            // this.logger.info('GoogleGenerativeAI is initialized.');
+            if (this.config.googleKey) {
+                this.genAI = new GoogleGenerativeAI(this.config.googleKey);
+                this.logger.info('GoogleGenerativeAI is initialized.');
+            } else {
+                this.logger.warn('Google key is missing. GoogleGenerativeAI will not be initialized.');
+            }
+
 
             await this.loadCommands();
             await this.loadEvents();
@@ -106,9 +111,9 @@ export default class Bot extends Client {
         }
 
         this.once('ready', async () => {
-            const applicationCommands = Routes.applicationCommands(config.clientId ?? '');
+            const applicationCommands = Routes.applicationCommands(this.config.clientId ?? '');
             try {
-                const rest = new REST({ version: '10' }).setToken(config.token ?? '');
+                const rest = new REST({ version: '10' }).setToken(this.config.token ?? '');
                 await rest.put(applicationCommands, { body: this.data });
                 this.logger.info(`Successfully loaded slash commands!`);
             } catch (error) {

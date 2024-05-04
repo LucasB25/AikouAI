@@ -6,11 +6,12 @@ export default class ClientReady extends Event {
             name: EventsTypes.ClientReady,
         });
     }
+
     public async run(): Promise<void> {
         this.client.logger.info(`Connected to Discord as ${this.client.user?.tag}!`);
 
         this.client.user?.setActivity({
-            name: '/imagine - by LucasB25',
+            name: `${this.client.config.activity}` + ' - by LucasB25',
             type: 1,
         });
     }
