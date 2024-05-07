@@ -32,7 +32,10 @@ export default class MessageCreate extends Event {
                     };
 
                     const genAI = new GoogleGenerativeAI(this.client.config.googleKey);
-                    const model = genAI.getGenerativeModel({ model: this.client.config.googleModel, generationConfig } as any);
+                    const model = genAI.getGenerativeModel({
+                        model: this.client.config.googleModel,
+                        generationConfig,
+                    } as any);
 
                     let chat = model.startChat({
                         history: [

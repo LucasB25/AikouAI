@@ -49,9 +49,10 @@ export default class Bot extends Client {
                 this.genAI = new GoogleGenerativeAI(this.config.googleKey);
                 this.logger.info('GoogleGenerativeAI is initialized.');
             } else {
-                this.logger.warn('Google key is missing. GoogleGenerativeAI will not be initialized.');
+                this.logger.warn(
+                    'Google key is missing. GoogleGenerativeAI will not be initialized.'
+                );
             }
-
 
             await this.loadCommands();
             await this.loadEvents();

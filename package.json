@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/LucasB25/AikouBot#readme",
     "devDependencies": {
-        "@types/node": "^20.12.8",
+        "@types/node": "^20.12.10",
         "@types/signale": "^1.4.7",
         "@typescript-eslint/eslint-plugin": "^7.8.0",
         "@typescript-eslint/parser": "^7.8.0",
@@ -48,10 +48,10 @@
     "dependencies": {
         "@google/generative-ai": "^0.10.0",
         "@napi-rs/canvas": "^0.1.52",
-        "discord.js": "^14.15.1",
+        "discord.js": "^14.15.2",
         "dotenv": "^16.4.5",
         "replicate": "^0.29.4",
         "signale": "^1.4.0",
-        "undici": "^6.15.0"
+        "undici": "^6.16.0"
     }
 }
