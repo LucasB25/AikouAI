@@ -23,7 +23,7 @@ export default class Imagine extends Command {
             descriptionLocalizations: {
                 fr: '📷 | Crée une image à partir d\'un prompt',
             },
-            category: 'fun',
+            category: 'ai',
             cooldown: 3,
             permissions: {
                 client: ['SendMessages', 'ViewChannel', 'EmbedLinks', 'AttachFiles'],

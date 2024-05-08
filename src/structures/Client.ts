@@ -45,8 +45,8 @@ export default class Bot extends Client {
                 this.logger.warn('Replicate token is missing. Replicate will not be initialized.');
             }
 
-            if (this.config.googleKey) {
-                this.genAI = new GoogleGenerativeAI(this.config.googleKey);
+            if (this.config.geminiKey) {
+                this.genAI = new GoogleGenerativeAI(this.config.geminiModel);
                 this.logger.info('GoogleGenerativeAI is initialized.');
             } else {
                 this.logger.warn(

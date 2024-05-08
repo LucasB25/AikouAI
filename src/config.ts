@@ -9,6 +9,6 @@ export default {
     replicateToken: process.env.REPLICATE_TOKEN,
     replicateModel: process.env.REPLICATE_MODEL as any,
 
-    googleKey: process.env.GOOGLE_KEY,
-    googleModel: process.env.GOOGLE_MODEL as any,
+    geminiKey: process.env.GEMINI_KEY,
+    geminiModel: process.env.GEMINI_MODEL as any,
 };
