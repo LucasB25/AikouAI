@@ -46,7 +46,7 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.10.0",
+        "@google/generative-ai": "^0.11.0",
         "@napi-rs/canvas": "^0.1.52",
         "discord.js": "^14.15.2",
         "dotenv": "^16.4.5",
