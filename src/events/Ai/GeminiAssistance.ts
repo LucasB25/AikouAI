@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { Message, TextChannel } from 'discord.js';
+import { ChannelType, Message, TextChannel } from 'discord.js';
 
 import { Bot, Event, EventsTypes } from '../../structures/index.js';
 
@@ -17,52 +17,88 @@ export default class MessageCreate extends Event {
     public async run(message: Message): Promise<void> {
         if (message.channel instanceof TextChannel) {
             if (message.content.endsWith('?')) {
-                try {
-                    const threadName = truncateText(message.content, 100);
-                    const thread = await message.startThread({
-                        name: threadName,
-                        autoArchiveDuration: 60,
-                    });
+                const threadName = message.content.trim();
+                const existingThread = message.guild?.channels.cache.find(
+                    channel =>
+                        channel.name === threadName && channel.type === ChannelType.PublicThread
+                );
 
-                    const generationConfig = {
-                        maxOutputTokens: 1900,
-                        temperature: 0.9,
-                        topK: 1,
-                        topP: 1,
-                    };
+                if (existingThread) {
+                    message.reply(
+                        `The information you are looking for is in the existing thread: ${existingThread}`
+                    );
+                } else {
+                    try {
+                        const threadName = truncateText(message.content, 100);
+                        const thread = await message.startThread({
+                            name: threadName,
+                            autoArchiveDuration: 60,
+                        });
 
-                    const genAI = new GoogleGenerativeAI(this.client.config.geminiKey);
-                    const model = genAI.getGenerativeModel({
-                        model: this.client.config.geminiModel,
-                        generationConfig,
-                    } as any);
-
-                    let chat = model.startChat({
-                        history: [
-                            {
-                                role: 'user',
-                                parts: [{ text: message.content }],
+                        const genAI = new GoogleGenerativeAI(this.client.config.geminiKey);
+                        const model = genAI.getGenerativeModel({
+                            model: this.client.config.geminiModel,
+                            generationConfig: {
+                                maxOutputTokens: 1900,
+                                temperature: 0.9,
+                                topK: 1,
+                                topP: 1,
                             },
-                        ],
-                    });
+                            safety_settings: [
+                                {
+                                    category: 'HARM_CATEGORY_HARASSMENT',
+                                    threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+                                },
+                                {
+                                    category: 'HARM_CATEGORY_HATE_SPEECH',
+                                    threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+                                },
+                                {
+                                    category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+                                    threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+                                },
+                                {
+                                    category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+                                },
+                            ],
+                        } as any);
 
-                    let result = await chat.sendMessage(message.content);
-                    let response = result.response;
+                        thread.sendTyping();
 
-                    let generatedText = response.text();
+                        let chat = model.startChat({
+                            history: [
+                                {
+                                    role: 'user',
+                                    parts: [{ text: message.content }],
+                                },
+                            ],
+                        });
 
-                    while (generatedText.length > 1500) {
-                        await thread.send(generatedText.substring(0, 1500));
-                        generatedText = generatedText.substring(1500);
+                        let result = await chat.sendMessage(message.content);
+                        let response = result.response;
 
-                        result = await chat.sendMessage(generatedText);
-                        response = result.response;
-                        generatedText = response.text();
+                        let generatedText = response.text();
+
+                        while (generatedText.length > 0) {
+                            let lastIndex = generatedText.lastIndexOf(' ', 1900);
+
+                            if (lastIndex === -1 || lastIndex >= 1900) {
+                                if (lastIndex === -1) lastIndex = 1900;
+
+                                const substring = generatedText.substring(0, lastIndex);
+                                await thread.send(substring);
+                                generatedText = generatedText.substring(lastIndex).trim();
+                            } else {
+                                const substring = generatedText.substring(0, lastIndex + 1).trim();
+                                await thread.send(substring);
+                                generatedText = generatedText.substring(lastIndex + 1).trim();
+                            }
+                        }
+                    } catch (error) {
+                        throw new Error(
+                            `An error occurred while generating the response: ${error}`
+                        );
                     }
-
-                    await thread.send(generatedText);
-                } catch (error) {
-                    throw new Error(`An error occurred while generating the response: ${error}`);
                 }
             }
         }

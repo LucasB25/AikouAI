@@ -38,27 +38,32 @@ export default class Bot extends Client {
     public async start(token: string): Promise<void> {
         try {
             this.logger.start('Starting bot...');
-            if (this.config.replicateToken) {
-                this.replicate = new Replicate({ auth: this.config.replicateToken });
-                this.logger.info('Replicate is initialized.');
-            } else {
-                this.logger.warn('Replicate token is missing. Replicate will not be initialized.');
-            }
-
-            if (this.config.geminiKey) {
-                this.genAI = new GoogleGenerativeAI(this.config.geminiModel);
-                this.logger.info('GoogleGenerativeAI is initialized.');
-            } else {
-                this.logger.warn(
-                    'Google key is missing. GoogleGenerativeAI will not be initialized.'
-                );
-            }
+            this.initReplicate();
+            this.initGoogleGenerativeAI();
 
             await this.loadCommands();
             await this.loadEvents();
             await this.login(token);
         } catch (error) {
             this.logger.error(error);
+        }
+    }
+
+    private initReplicate(): void {
+        if (this.config.replicateToken) {
+            this.replicate = new Replicate({ auth: this.config.replicateToken });
+            this.logger.info('Replicate is initialized.');
+        } else {
+            this.logger.warn('Replicate token is missing. Replicate will not be initialized.');
+        }
+    }
+
+    private initGoogleGenerativeAI(): void {
+        if (this.config.geminiKey) {
+            this.genAI = new GoogleGenerativeAI(this.config.geminiModel);
+            this.logger.info('GoogleGenerativeAI is initialized.');
+        } else {
+            this.logger.warn('Google key is missing. GoogleGenerativeAI will not be initialized.');
         }
     }
 

@@ -12,6 +12,18 @@ export class Canvas {
     public async mergeImages(options: MergeImagesOptions): Promise<Buffer> {
         try {
             const { width, height, images } = options;
+
+            if (
+                typeof width !== 'number' ||
+                width <= 0 ||
+                typeof height !== 'number' ||
+                height <= 0 ||
+                !Array.isArray(images) ||
+                images.length === 0
+            ) {
+                throw new Error('Invalid parameters for mergeImages');
+            }
+
             const imageCount = images.length;
             const rows = Math.ceil(Math.sqrt(imageCount));
             const cols = Math.ceil(imageCount / rows);
@@ -20,7 +32,7 @@ export class Canvas {
             const canvas = createCanvas(width, height);
             const ctx = canvas.getContext('2d');
 
-            await Promise.all(
+            await Promise.allSettled(
                 images.map(async (imageUrl, index) => {
                     try {
                         const response = await request(imageUrl);
@@ -28,9 +40,7 @@ export class Canvas {
                             throw new Error(`Failed to fetch image: ${imageUrl}`);
                         }
                         const buffer = await response.body.arrayBuffer();
-                        const tempFilePath = await fs.mkdtemp('temp');
-                        const tempFileName = `${tempFilePath}/temp${index}.tmp`;
-                        await fs.writeFile(tempFileName, Buffer.from(buffer));
+                        const tempFileName = await this.createTempFile(index, buffer);
                         const image = await loadImage(tempFileName);
                         const x = (index % cols) * chunkWidth;
                         const y = Math.floor(index / cols) * chunkHeight;
@@ -46,5 +56,12 @@ export class Canvas {
         } catch (error) {
             throw new Error(`Error merging images: ${error}`);
         }
+    }
+
+    private async createTempFile(index: number, buffer: ArrayBuffer): Promise<string> {
+        const tempFilePath = await fs.mkdtemp('temp');
+        const tempFileName = `${tempFilePath}/temp${index}.tmp`;
+        await fs.writeFile(tempFileName, Buffer.from(buffer));
+        return tempFileName;
     }
 }

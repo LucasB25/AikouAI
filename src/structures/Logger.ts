@@ -17,7 +17,7 @@ interface LoggerOptions {
     interactive?: boolean;
     logLevel?: LogLevel;
     scope?: string;
-    types?: Record<LogLevel, { badge: string; color: string; label: string }>;
+    types?: Partial<Record<LogLevel, { badge: string; color: string; label: string }>>;
 }
 
 const defaultOptions: LoggerOptions = {
@@ -47,6 +47,13 @@ export default class Logger extends Signale {
         const validLogLevels = Object.values(LogLevel);
         if (options.logLevel && !validLogLevels.includes(options.logLevel)) {
             throw new Error(`Invalid log level: ${options.logLevel}`);
+        }
+        if (options.types) {
+            for (const level of Object.keys(options.types)) {
+                if (!validLogLevels.includes(level as LogLevel)) {
+                    throw new Error(`Invalid log level in types: ${level}`);
+                }
+            }
         }
     }
 }

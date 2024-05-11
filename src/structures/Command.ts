@@ -46,7 +46,7 @@ export default class Command {
         this.description = {
             content: options.description?.content || 'No description provided',
             usage: options.description?.usage || 'No usage provided',
-            examples: options.description?.examples || [''],
+            examples: options.description?.examples || ['No examples provided'],
         };
         this.descriptionLocalizations = options.descriptionLocalizations || null;
         this.cooldown = options.cooldown || 3;

@@ -4,12 +4,19 @@ import config from './config.js';
 import Bot from './structures/Client.js';
 
 const clientOptions: ClientOptions = {
-    intents: 35331,
+    intents: 131059,
     allowedMentions: {
         parse: ['users', 'roles', 'everyone'],
         repliedUser: false,
     },
-    partials: [Partials.GuildMember, Partials.Message, Partials.User],
+    partials: [
+        Partials.GuildMember,
+        Partials.Message,
+        Partials.User,
+        Partials.ThreadMember,
+        Partials.Channel,
+        Partials.GuildScheduledEvent,
+    ],
 };
 
 const client = new Bot(clientOptions);

@@ -8,31 +8,48 @@ export default class InteractionCreate extends Event {
             name: EventsTypes.InteractionCreate,
         });
     }
+
     public async run(interaction: CommandInteraction): Promise<void> {
         if (interaction.isCommand()) {
-            const command = this.client.commands.get(interaction.commandName);
+            const commandName = interaction.commandName;
+            const command = this.client.commands.get(commandName);
             if (!command) return;
+
             try {
                 await command.run(this.client, interaction);
             } catch (error) {
-                if (
-                    error instanceof Error &&
-                    error.message ===
-                        'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.'
-                ) {
-                    await interaction[interaction.replied ? 'editReply' : 'reply']({
-                        content: 'NSFW content detected. You can\' generate NSFW images!',
-                        ephemeral: true,
-                    });
+                if (this.isNSFWError(error)) {
+                    await this.handleNSFWError(interaction);
                 } else {
                     this.client.logger.error(error);
-
-                    await interaction[interaction.replied ? 'editReply' : 'reply']({
-                        content: 'There was an error while executing this command!',
-                        ephemeral: true,
-                    });
+                    await this.replyWithError(
+                        interaction,
+                        'There was an error while executing this command!'
+                    );
                 }
             }
         }
+    }
+
+    private isNSFWError(error: any): boolean {
+        return (
+            error instanceof Error &&
+            error.message ===
+                'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.'
+        );
+    }
+
+    private async handleNSFWError(interaction: CommandInteraction): Promise<void> {
+        await interaction[interaction.replied ? 'editReply' : 'reply']({
+            content: 'NSFW content detected. You can\'t generate NSFW images!',
+            ephemeral: true,
+        });
+    }
+
+    private async replyWithError(interaction: CommandInteraction, message: string): Promise<void> {
+        await interaction[interaction.replied ? 'editReply' : 'reply']({
+            content: message,
+            ephemeral: true,
+        });
     }
 }
