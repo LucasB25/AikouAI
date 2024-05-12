@@ -39,24 +39,36 @@ export default class Command {
     public options: ApplicationCommandOption[];
     public category: string;
 
-    constructor(client: Bot, options: CommandOptions) {
+    constructor(
+        client: Bot,
+        {
+            name,
+            nameLocalizations = {},
+            description = {
+                content: 'No description provided',
+                usage: 'No usage provided',
+                examples: ['No examples provided'],
+            },
+            descriptionLocalizations = null,
+            cooldown = 3,
+            permissions = {
+                dev: false,
+                client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
+                user: [],
+            },
+            options = [],
+            category = 'general',
+        }: CommandOptions
+    ) {
         this.client = client;
-        this.name = options.name;
-        this.nameLocalizations = options.nameLocalizations || {};
-        this.description = {
-            content: options.description?.content || 'No description provided',
-            usage: options.description?.usage || 'No usage provided',
-            examples: options.description?.examples || ['No examples provided'],
-        };
-        this.descriptionLocalizations = options.descriptionLocalizations || null;
-        this.cooldown = options.cooldown || 3;
-        this.permissions = {
-            dev: options.permissions?.dev || false,
-            client: options.permissions?.client || ['SendMessages', 'ViewChannel', 'EmbedLinks'],
-            user: options.permissions?.user || [],
-        };
-        this.options = options.options || [];
-        this.category = options.category || 'general';
+        this.name = name;
+        this.nameLocalizations = nameLocalizations;
+        this.description = description;
+        this.descriptionLocalizations = descriptionLocalizations;
+        this.cooldown = cooldown;
+        this.permissions = permissions;
+        this.options = options;
+        this.category = category;
     }
 
     public async run(_client: Bot, _message: any): Promise<any> {

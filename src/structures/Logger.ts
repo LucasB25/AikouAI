@@ -39,7 +39,8 @@ const defaultOptions: LoggerOptions = {
 
 export default class Logger extends Signale {
     constructor(options: LoggerOptions = {}) {
-        super({ ...defaultOptions, ...options });
+        const { types, ...rest } = options;
+        super({ ...defaultOptions, ...rest, types });
         this.validateOptions(options);
     }
 

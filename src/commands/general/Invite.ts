@@ -7,7 +7,14 @@ export default class Invite extends Command {
         super(client, {
             name: 'invite',
             nameLocalizations: {
-                fr: 'ping',
+                fr: 'invite',
+                'es-ES': 'invitar',
+                de: 'einladen',
+                it: 'invita',
+                ja: '招待',
+                ko: '초대',
+                'zh-CN': '邀请',
+                ru: 'пригласить',
             },
             description: {
                 content: '📨 | Get the bot invite link',
@@ -16,6 +23,13 @@ export default class Invite extends Command {
             },
             descriptionLocalizations: {
                 fr: '📨 | Afficher le lien d\'invitation.',
+                'es-ES': '📨 | Obtén el enlace de invitación del bot',
+                de: '📨 | Erhalte den Einladungslink des Bots',
+                it: '📨 | Ottieni il link di invito del bot',
+                ja: '📨 | ボットの招待リンクを取得します。',
+                ko: '📨 | 봇 초대 링크 가져오기',
+                'zh-CN': '📨 | 获取机器人邀请链接',
+                ru: '📨 | Получить ссылку на приглашение бота',
             },
             category: 'general',
             permissions: {

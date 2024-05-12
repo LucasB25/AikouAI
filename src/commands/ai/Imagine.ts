@@ -14,6 +14,13 @@ export default class Imagine extends Command {
             name: 'imagine',
             nameLocalizations: {
                 fr: 'imagine',
+                'es-ES': 'imagina',
+                de: 'vorstellen',
+                it: 'immagina',
+                ja: '想像する',
+                ko: '상상하다',
+                'zh-CN': '想象',
+                ru: 'представлять',
             },
             description: {
                 content: '📷 | Creates an image from a prompt',
@@ -22,6 +29,13 @@ export default class Imagine extends Command {
             },
             descriptionLocalizations: {
                 fr: '📷 | Crée une image à partir d\'un prompt',
+                'es-ES': '📷 | Crea una imagen a partir de un indicio',
+                de: '📷 | Erstellt ein Bild aus einem Hinweis',
+                it: '📷 | Crea un\'immagine da un prompt',
+                ja: '📷 | プロンプトから画像を作成します。',
+                ko: '📷 | 프롬프트에서 이미지를 생성합니다.',
+                'zh-CN': '📷 | 从提示创建图像',
+                ru: '📷 | Создает изображение из подсказки',
             },
             category: 'ai',
             cooldown: 3,
@@ -33,41 +47,114 @@ export default class Imagine extends Command {
             options: [
                 {
                     name: 'prompt',
+                    nameLocalizations: {
+                        fr: 'prompt',
+                        'es-ES': 'prompt',
+                        de: 'prompt',
+                        it: 'prompt',
+                        ja: 'prompt',
+                        ko: '프롬프트',
+                        'zh-CN': 'prompt',
+                        ru: 'prompt',
+                    },
                     description: 'The prompt to use',
                     descriptionLocalizations: {
                         fr: 'Le prompt à utiliser',
+                        'es-ES': 'El indicio a utilizar',
+                        de: 'Der Hinweis zu verwenden',
+                        it: 'Il prompt da utilizzare',
+                        ja: '使用するプロンプト',
+                        ko: '사용할 프롬프트',
+                        'zh-CN': '要使用的提示',
+                        ru: 'Подсказка для использования',
                     },
                     type: 3,
                     required: true,
                 },
                 {
-                    name: 'negative-prompt',
-                    description: 'The negative prompt to use',
-                    descriptionLocalizations: {
-                        fr: 'Le prompt négatif à utiliser',
-                    },
-                    type: 3,
-                    required: false,
-                },
-                {
                     name: 'num-outputs',
+                    nameLocalizations: {
+                        fr: 'num-outputs',
+                        'es-ES': 'num-outputs',
+                        de: 'num-outputs',
+                        it: 'num-outputs',
+                        ja: 'num-outputs',
+                        ko: '출력 수',
+                        'zh-CN': 'num-outputs',
+                        ru: 'num-outputs',
+                    },
                     description: 'The number of outputs to generate',
                     descriptionLocalizations: {
                         fr: 'Le nombre de résultats à générer',
+                        'es-ES': 'El número de salidas a generar',
+                        de: 'Die Anzahl der zu generierenden Ausgaben',
+                        it: 'Il numero di output da generare',
+                        ja: '生成する出力の数',
+                        ko: '생성 할 출력 수',
+                        'zh-CN': '要生成的输出数量',
+                        ru: 'Количество выводов для генерации',
                     },
-                    type: 4,
+                    type: 3,
+                    choices: [
+                        {
+                            name: '1',
+                            value: '1',
+                        },
+                        {
+                            name: '2',
+                            value: '2',
+                        },
+                        {
+                            name: '3',
+                            value: '3',
+                        },
+                        {
+                            name: '4',
+                            value: '4',
+                        },
+                    ],
+                    required: false,
+                },
+                {
+                    name: 'negative-prompt',
+                    nameLocalizations: {
+                        fr: 'negative-prompt',
+                        'es-ES': 'negative-prompt',
+                        de: 'negative-prompt',
+                        it: 'negative-prompt',
+                        ja: 'negative-prompt',
+                        ko: '부정적인프롬프트',
+                        'zh-CN': 'negative-prompt',
+                        ru: 'negative-prompt',
+                    },
+                    description: 'The negative prompt to use',
+                    descriptionLocalizations: {
+                        fr: 'Le prompt négatif à utiliser',
+                        'es-ES': 'El indicio negativo a utilizar',
+                        de: 'Der negative Hinweis zu verwenden',
+                        it: 'Il prompt negativo da utilizzare',
+                        ja: '使用するネガティブプロンプト',
+                        ko: '사용할 부정적인 프롬프트',
+                        'zh-CN': '要使用的负面提示',
+                        ru: 'Отрицательная подсказка для использования',
+                    },
+                    type: 3,
                     required: false,
                 },
             ],
         });
     }
+
     async run(client: Bot, interaction: CommandInteraction): Promise<void> {
         const prompt = interaction.options.get('prompt')?.value as string | undefined;
+        const numOutputsString = interaction.options.get('num-outputs')?.value as
+            | string
+            | undefined;
+        const numOutputs = parseInt(numOutputsString || '4', 10);
+
         const negativePrompt = interaction.options.get('negative-prompt')?.value as
             | string
             | undefined;
-        const numOutputs =
-            (interaction.options.get('num-outputs')?.value as number | undefined) || 4;
 
         if (!prompt) {
             await interaction.reply({ content: 'Please provide a prompt.', ephemeral: true });
@@ -83,7 +170,7 @@ export default class Imagine extends Command {
                 num_outputs: numOutputs,
                 negative_prompt: negativePrompt,
             },
-        })) as any[];
+        })) as string[];
 
         const rowImg = await client.canvas.mergeImages({
             width: 1000,
@@ -92,21 +179,20 @@ export default class Imagine extends Command {
         });
 
         const attachment = new AttachmentBuilder(rowImg).setName('imagine.png');
-        const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+
+        const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
             ...prediction.map((_, i) =>
                 new ButtonBuilder()
                     .setLabel(`${i + 1}`)
                     .setStyle(ButtonStyle.Link)
                     .setURL(prediction[i])
-            )
-        );
-        const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents(
+            ),
             new ButtonBuilder()
                 .setLabel(`Support`)
                 .setStyle(ButtonStyle.Link)
                 .setURL('https://discord.gg/JeaQTqzsJw')
         );
 
-        await interaction.editReply({ files: [attachment], components: [row, row2] });
+        await interaction.editReply({ files: [attachment], components: [buttonRow] });
     }
 }

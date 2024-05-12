@@ -10,23 +10,24 @@ export default class InteractionCreate extends Event {
     }
 
     public async run(interaction: CommandInteraction): Promise<void> {
-        if (interaction.isCommand()) {
-            const commandName = interaction.commandName;
-            const command = this.client.commands.get(commandName);
-            if (!command) return;
+        try {
+            if (interaction.isCommand()) {
+                const commandName = interaction.commandName;
+                const command = this.client.commands.get(commandName);
+                if (!command) return;
 
-            try {
                 await command.run(this.client, interaction);
-            } catch (error) {
-                if (this.isNSFWError(error)) {
-                    await this.handleNSFWError(interaction);
-                } else {
-                    this.client.logger.error(error);
-                    await this.replyWithError(
-                        interaction,
-                        'There was an error while executing this command!'
-                    );
-                }
+            }
+        } catch (error) {
+            this.client.logger.error(error);
+
+            if (this.isNSFWError(error)) {
+                await this.handleNSFWError(interaction);
+            } else {
+                await this.replyWithError(
+                    interaction,
+                    'There was an error while executing this command!'
+                );
             }
         }
     }

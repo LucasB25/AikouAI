@@ -26,7 +26,7 @@
 
 # AikouBot
 
-A Discord Bot that can generate text based on a given prompt using [Replicate](https://replicate.com/)
+AikouBot is a versatile Discord bot that now also offers text-to-text capabilities through its integration with Google Gemini, an advanced text generation model platform. It automatically responds to specific commands on Discord, generating text or images based on the nature of users' requests.
 
 ## 🔧 Requirements
 
@@ -35,6 +35,8 @@ A Discord Bot that can generate text based on a given prompt using [Replicate](h
 -   Download [Node.js](https://nodejs.org/en/download/)
 
 -   Create [Replicate](https://replicate.com/) account and get token
+
+-   Create [Gemini](https://makersuite.google.com/) account and get token (optional)
 
 ## 🚀 Installation from source
 
@@ -68,11 +70,13 @@ TOKEN= #Discord Bot Token
 CLIENT_ID= #Discord Bot Client ID
 Activity=/imagine
 
+#For REPLICATE
 REPLICATE_TOKEN= #Replicate Token from https://replicate.com/signin
 REPLICATE_MODEL=bytedance/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ffefea21465756a6ce24b7ea4165eba6a
 
-GOOGLE_KEY= #Google key from https://makersuite.google.com/
-GOOGLE_MODEL=gemini-1.5-pro-latest
+#For GEMINI
+GEMINI_KEY= #GEMINI key from https://makersuite.google.com/
+GEMINI_MODEL=gemini-1.5-pro-latest
 ```
 
 5. Run the bot:
