@@ -1,4 +1,4 @@
-<center><img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=AikouBot&fontSize=80&fontAlignY=35&animation=twinkling&fontColor=gradient" /></center>
+<center><img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=AikouAI&fontSize=80&fontAlignY=35&animation=twinkling&fontColor=gradient" /></center>
 
 [![Version][version-shield]](version-url)
 [![Contributors][contributors-shield]][contributors-url]
@@ -7,26 +7,26 @@
 [![Issues][issues-shield]][issues-url]
 [![Support Server][support-shield]][support-server]
 [![MIT License][license-shield]][license-url]
-[![Run on Repl.it](https://repl.it/badge/github/LucasB25/AikouBot)](https://repl.it/github/LucasB25/AikouBot)
-[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/LucasB25/AikouBot)
+[![Run on Repl.it](https://repl.it/badge/github/LucasB25/AikouAI)](https://repl.it/github/LucasB25/AikouAI)
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/LucasB25/AikouAI)
 
 <!-- PROJECT LOGO -->
 <br />
 
-  <h1 align="center">AikouBot</h1>
+  <h1 align="center">AikouAI</h1>
 
-  <p align="center">AikouBot and TypeScript.
+  <p align="center">AikouAI and TypeScript.
     <br />
     <br />
         <a href="https://discord.gg/AhUJa2kdAr">Serveur Support</a>
     ·
-    <a href="https://github.com/LucasB25/AikouBot/issues">Report Bug & Request Feature</a>
+    <a href="https://github.com/LucasB25/AikouAI/issues">Report Bug & Request Feature</a>
   </p>
 </p>
 
-# AikouBot
+# AikouAI
 
-AikouBot is a versatile Discord bot that now also offers text-to-text capabilities through its integration with Google Gemini, an advanced text generation model platform. It automatically responds to specific commands on Discord, generating text or images based on the nature of users' requests.
+AikouAI is a versatile Discord bot that now also offers text-to-text capabilities through its integration with Google Gemini, an advanced text generation model platform. It automatically responds to specific commands on Discord, generating text or images based on the nature of users' requests.
 
 ## 🔧 Requirements
 
@@ -40,16 +40,16 @@ AikouBot is a versatile Discord bot that now also offers text-to-text capabiliti
 
 ## 🚀 Installation from source
 
-1. Clone the AikouBot repository:
+1. Clone the AikouAI repository:
 
 ```bash
-git clone https://github.com/LucasB25/AikouBot.git
+git clone https://github.com/LucasB25/AikouAI.git
 ```
 
-2. change the directory to AikouBot
+2. change the directory to AikouAI
 
 ```bash
-cd AikouBot
+cd AikouAI
 ```
 
 3. Install the required packages:
@@ -63,7 +63,7 @@ yarn i
 4. Set up your environment variables:
 
 Create a `.env` file in the root directory of your project with the following variables:
-or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/AikouBot/main/.env.example) file
+or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/AikouAI/main/.env.example) file
 
 ```bash
 TOKEN= #Discord Bot Token
@@ -87,7 +87,7 @@ npm start
 
 ## 📜 Contributing
 
-Thank you for your interest in contributing to AikouBot! Here are some guidelines to follow when contributing:
+Thank you for your interest in contributing to AikouAI! Here are some guidelines to follow when contributing:
 
 1. Fork the repository and create a new branch for your feature or bug fix.
 2. Write clean and concise code that follows the established coding style.
@@ -95,26 +95,26 @@ Thank you for your interest in contributing to AikouBot! Here are some guideline
 4. Write and run tests for your code.
 5. Submit a pull request with your changes.
 
-Your contribution will be reviewed by the project maintainers, and any necessary feedback or changes will be discussed with you. We appreciate your help in making AikouBot better!
+Your contribution will be reviewed by the project maintainers, and any necessary feedback or changes will be discussed with you. We appreciate your help in making AikouAI better!
 
 ## 👥 Contributors
 
 Thanks goes to these wonderful people :
 
-<a href="https://github.com/LucasB25/AikouBot/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=LucasB25/AikouBot" alt="contributors" width="500" />
+<a href="https://github.com/LucasB25/AikouAI/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=LucasB25/AikouAI" alt="contributors" width="500" />
 </a>
 
-[version-shield]: https://img.shields.io/github/package-json/v/LucasB25/AikouBot?style=for-the-badge
-[contributors-shield]: https://img.shields.io/github/contributors/LucasB25/AikouBot.svg?style=for-the-badge
-[contributors-url]: https://github.com/LucasB25/AikouBot/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/LucasB25/AikouBot.svg?style=for-the-badge
-[forks-url]: https://github.com/LucasB25/AikouBot/network/members
-[stars-shield]: https://img.shields.io/github/stars/LucasB25/AikouBot.svg?style=for-the-badge
-[stars-url]: https://github.com/LucasB25/AikouBot/stargazers
-[issues-shield]: https://img.shields.io/github/issues/LucasB25/AikouBot.svg?style=for-the-badge
-[issues-url]: https://github.com/LucasB25/AikouBot/issues
-[license-shield]: https://img.shields.io/github/license/LucasB25/AikouBot.svg?style=for-the-badge
-[license-url]: https://github.com/LucasB25/AikouBot/blob/mains/LICENSE
+[version-shield]: https://img.shields.io/github/package-json/v/LucasB25/AikouAI?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/LucasB25/AikouAI.svg?style=for-the-badge
+[contributors-url]: https://github.com/LucasB25/AikouAI/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/LucasB25/AikouAI.svg?style=for-the-badge
+[forks-url]: https://github.com/LucasB25/AikouAI/network/members
+[stars-shield]: https://img.shields.io/github/stars/LucasB25/AikouAI.svg?style=for-the-badge
+[stars-url]: https://github.com/LucasB25/AikouAI/stargazers
+[issues-shield]: https://img.shields.io/github/issues/LucasB25/AikouAI.svg?style=for-the-badge
+[issues-url]: https://github.com/LucasB25/AikouAI/issues
+[license-shield]: https://img.shields.io/github/license/LucasB25/AikouAI.svg?style=for-the-badge
+[license-url]: https://github.com/LucasB25/AikouAI/blob/mains/LICENSE
 [support-server]: https://discord.gg/AhUJa2kdAr
 [support-shield]: https://img.shields.io/discord/942117923001098260.svg?style=for-the-badge&logo=discord&colorB=7289DA

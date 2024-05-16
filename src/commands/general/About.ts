@@ -45,7 +45,7 @@ export default class About extends Command {
     async run(client: Bot, interaction: CommandInteraction): Promise<void> {
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
             new ButtonBuilder()
-                .setLabel('Invite AikouBot')
+                .setLabel('Invite AikouAI')
                 .setURL(
                     `https://discord.com/oauth2/authorize?client_id=${this.client.user?.id}&scope=bot%20applications.commands&permissions=8`
                 )
@@ -59,12 +59,12 @@ export default class About extends Command {
         const embed = client
             .embed()
             .setColor(this.client.color)
-            .setAuthor({ name: 'AikouBot' })
+            .setAuthor({ name: 'AikouAI' })
             .addFields(
                 { name: 'Creator', value: '[LucasB25](https://github.com/lucasb25)', inline: true },
                 {
                     name: 'Repository',
-                    value: '[Here](https://github.com/lucasb25/AikouBot)',
+                    value: '[Here](https://github.com/lucasb25/AikouAI)',
                     inline: true,
                 },
                 { name: 'Support', value: '[Here](https://discord.gg/AhUJa2kdAr)', inline: true }

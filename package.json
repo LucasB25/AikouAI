@@ -1,7 +1,7 @@
 {
-    "name": "AikouBot",
+    "name": "AikouAI",
     "version": "1.4.0",
-    "description": "A simple AikouBot bot for discord",
+    "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
@@ -16,17 +16,17 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/LucasB25/AikouBot.git"
+        "url": "git+https://github.com/LucasB25/AikouAI.git"
     },
     "bugs": {
-        "url": "https://github.com/LucasB25/AikouBot/issues"
+        "url": "https://github.com/LucasB25/AikouAI/issues"
     },
-    "homepage": "https://github.com/LucasB25/AikouBot#readme",
+    "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
-        "@types/node": "^20.12.11",
+        "@types/node": "^20.12.12",
         "@types/signale": "^1.4.7",
-        "@typescript-eslint/eslint-plugin": "^7.8.0",
-        "@typescript-eslint/parser": "^7.8.0",
+        "@typescript-eslint/eslint-plugin": "^7.9.0",
+        "@typescript-eslint/parser": "^7.9.0",
         "eslint": "^8.57.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-unicorn": "^53.0.0",
@@ -55,7 +55,7 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.11.1",
+        "@google/generative-ai": "^0.11.2",
         "@napi-rs/canvas": "^0.1.52",
         "discord.js": "^14.15.2",
         "dotenv": "^16.4.5",
