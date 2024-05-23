@@ -1,6 +1,6 @@
 {
     "name": "AikouAI",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",
@@ -25,8 +25,8 @@
     "devDependencies": {
         "@types/node": "^20.12.12",
         "@types/signale": "^1.4.7",
-        "@typescript-eslint/eslint-plugin": "^7.9.0",
-        "@typescript-eslint/parser": "^7.9.0",
+        "@typescript-eslint/eslint-plugin": "^7.10.0",
+        "@typescript-eslint/parser": "^7.10.0",
         "eslint": "^8.57.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-unicorn": "^53.0.0",
@@ -55,12 +55,12 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.11.2",
+        "@google/generative-ai": "^0.11.4",
         "@napi-rs/canvas": "^0.1.52",
         "discord.js": "^14.15.2",
         "dotenv": "^16.4.5",
         "replicate": "^0.30.0",
         "signale": "^1.4.0",
-        "undici": "^6.16.1"
+        "undici": "^6.18.1"
     }
 }

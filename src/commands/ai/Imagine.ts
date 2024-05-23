@@ -1,12 +1,6 @@
-import {
-    ActionRowBuilder,
-    AttachmentBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    CommandInteraction,
-} from 'discord.js';
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
-import { Bot, Command } from '../../structures/index.js';
+import { Bot, Command, Context } from '../../structures/index.js';
 
 export default class Imagine extends Command {
     constructor(client: Bot) {
@@ -23,19 +17,19 @@ export default class Imagine extends Command {
                 ru: 'представлять',
             },
             description: {
-                content: '📷 | Creates an image from a prompt',
+                content: 'Creates an image from a prompt',
                 usage: 'imagine <prompt>',
                 examples: ['imagine'],
             },
             descriptionLocalizations: {
-                fr: '📷 | Crée une image à partir d\'un prompt',
-                'es-ES': '📷 | Crea una imagen a partir de un indicio',
-                de: '📷 | Erstellt ein Bild aus einem Hinweis',
-                it: '📷 | Crea un\'immagine da un prompt',
-                ja: '📷 | プロンプトから画像を作成します。',
-                ko: '📷 | 프롬프트에서 이미지를 생성합니다.',
-                'zh-CN': '📷 | 从提示创建图像',
-                ru: '📷 | Создает изображение из подсказки',
+                fr: 'Crée une image à partir d\'un prompt',
+                'es-ES': 'Crea una imagen a partir de un indicio',
+                de: 'Erstellt ein Bild aus einem Hinweis',
+                it: 'Crea un\'immagine da un prompt',
+                ja: 'プロンプトから画像を作成します。',
+                ko: '프롬프트에서 이미지를 생성합니다.',
+                'zh-CN': '从提示创建图像',
+                ru: 'Создает изображение из подсказки',
             },
             category: 'ai',
             cooldown: 3,
@@ -145,24 +139,19 @@ export default class Imagine extends Command {
         });
     }
 
-    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
-        const prompt = interaction.options.get('prompt')?.value as string | undefined;
-        const numOutputsString = interaction.options.get('num-outputs')?.value as
-            | string
-            | undefined;
+    async run(client: Bot, ctx: Context, args: string[]): Promise<void> {
+        const prompt = args[0];
+        const numOutputsString = args[1];
         const numOutputs = parseInt(numOutputsString || '4', 10);
-
-        const negativePrompt = interaction.options.get('negative-prompt')?.value as
-            | string
-            | undefined;
+        const negativePrompt = args[3];
 
         if (!prompt) {
-            await interaction.reply({ content: 'Please provide a prompt.', ephemeral: true });
+            await ctx.sendMessage({ content: 'Please provide a prompt.' });
             return;
         }
 
-        await interaction.deferReply({ fetchReply: true });
-        await interaction.editReply({ content: `**${prompt}** - ${interaction.user.toString()}` });
+        await ctx.sendDeferMessage({ fetchReply: true });
+        await ctx.editMessage({ content: `**${prompt}** - ${client.user.toString()}` });
 
         const prediction = (await client.replicate.run(this.client.config.replicateModel, {
             input: {
@@ -193,6 +182,6 @@ export default class Imagine extends Command {
                 .setURL('https://discord.gg/JeaQTqzsJw')
         );
 
-        await interaction.editReply({ files: [attachment], components: [buttonRow] });
+        await ctx.editMessage({ files: [attachment], components: [buttonRow], ephemeral: false });
     }
 }

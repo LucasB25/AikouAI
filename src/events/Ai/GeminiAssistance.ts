@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { ChannelType, Message, TextChannel } from 'discord.js';
 
-import { Bot, Event, EventsTypes } from '../../structures/index.js';
+import { Bot, Event } from '../../structures/index.js';
 
 function truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? text.substring(0, maxLength - 3) + '...' : text;
@@ -10,7 +10,7 @@ function truncateText(text: string, maxLength: number): string {
 export default class MessageCreate extends Event {
     constructor(client: Bot, file: string) {
         super(client, file, {
-            name: EventsTypes.MessageCreate,
+            name: 'messageCreate',
         });
     }
 

@@ -1,6 +1,6 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
-import { Bot, Command } from '../../structures/index.js';
+import { Bot, Command, Context } from '../../structures/index.js';
 
 export default class About extends Command {
     constructor(client: Bot) {
@@ -17,19 +17,19 @@ export default class About extends Command {
                 ru: 'о',
             },
             description: {
-                content: '📨 | Shows information about the bot',
+                content: 'Shows information about the bot',
                 usage: 'about',
                 examples: ['about'],
             },
             descriptionLocalizations: {
-                fr: '📨 | Affiche des informations sur le bot',
-                'es-ES': '📨 | Muestra información sobre el bot',
-                de: '📨 | Zeigt Informationen über den Bot an',
-                it: '📨 | Mostra informazioni sul bot',
-                ja: '📨 | ボットの情報を表示します。',
-                ko: '📨 | 봇에 대한 정보를 표시합니다.',
-                'zh-CN': '📨 | 显示有关机器人的信息',
-                ru: '📨 | Показывает информацию о боте',
+                fr: 'Affiche des informations sur le bot',
+                'es-ES': 'Muestra información sobre el bot',
+                de: 'Zeigt Informationen über den Bot an',
+                it: 'Mostra informazioni sul bot',
+                ja: 'ボットの情報を表示します。',
+                ko: '봇에 대한 정보를 표시합니다.',
+                'zh-CN': '显示有关机器人的信息',
+                ru: 'Показывает информацию о боте',
             },
             category: 'general',
             permissions: {
@@ -42,10 +42,10 @@ export default class About extends Command {
         });
     }
 
-    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
+    async run(client: Bot, ctx: Context): Promise<void> {
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
             new ButtonBuilder()
-                .setLabel('Invite AikouAI')
+                .setLabel(`Invite ${this.client.user.username}`)
                 .setURL(
                     `https://discord.com/oauth2/authorize?client_id=${this.client.user?.id}&scope=bot%20applications.commands&permissions=8`
                 )
@@ -70,6 +70,6 @@ export default class About extends Command {
                 { name: 'Support', value: '[Here](https://discord.gg/AhUJa2kdAr)', inline: true }
             );
 
-        await interaction.reply({ embeds: [embed], components: [row] });
+        await ctx.sendMessage({ embeds: [embed], components: [row] });
     }
 }

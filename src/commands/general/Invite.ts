@@ -1,6 +1,4 @@
-import { CommandInteraction } from 'discord.js';
-
-import { Bot, Command } from '../../structures/index.js';
+import { Bot, Command, Context } from '../../structures/index.js';
 
 export default class Invite extends Command {
     constructor(client: Bot) {
@@ -17,19 +15,19 @@ export default class Invite extends Command {
                 ru: 'пригласить',
             },
             description: {
-                content: '📨 | Get the bot invite link',
+                content: 'Get the bot invite link',
                 usage: 'invite',
                 examples: ['invite'],
             },
             descriptionLocalizations: {
-                fr: '📨 | Afficher le lien d\'invitation.',
-                'es-ES': '📨 | Obtén el enlace de invitación del bot',
-                de: '📨 | Erhalte den Einladungslink des Bots',
-                it: '📨 | Ottieni il link di invito del bot',
-                ja: '📨 | ボットの招待リンクを取得します。',
-                ko: '📨 | 봇 초대 링크 가져오기',
-                'zh-CN': '📨 | 获取机器人邀请链接',
-                ru: '📨 | Получить ссылку на приглашение бота',
+                fr: 'Afficher le lien d\'invitation.',
+                'es-ES': 'Obtén el enlace de invitación del bot',
+                de: 'Erhalte den Einladungslink des Bots',
+                it: 'Ottieni il link di invito del bot',
+                ja: 'ボットの招待リンクを取得します。',
+                ko: '봇 초대 링크 가져오기',
+                'zh-CN': '获取机器人邀请链接',
+                ru: 'Получить ссылку на приглашение бота',
             },
             category: 'general',
             permissions: {
@@ -42,7 +40,7 @@ export default class Invite extends Command {
         });
     }
 
-    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
+    async run(client: Bot, ctx: Context): Promise<void> {
         const embed = client
             .embed()
             .setColor(this.client.color)
@@ -50,6 +48,6 @@ export default class Invite extends Command {
                 `Invite me to your server with this link: [Invite](https://discord.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot%20applications.commands&permissions=8)`
             );
 
-        await interaction.reply({ embeds: [embed] });
+        await ctx.sendMessage({ embeds: [embed] });
     }
 }

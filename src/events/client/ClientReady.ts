@@ -1,9 +1,9 @@
-import { Bot, Event, EventsTypes } from '../../structures/index.js';
+import { Bot, Event } from '../../structures/index.js';
 
 export default class ClientReady extends Event {
     constructor(client: Bot, file: string) {
         super(client, file, {
-            name: EventsTypes.ClientReady,
+            name: 'ready',
         });
     }
 

@@ -1,22 +1,24 @@
 import { CommandInteraction } from 'discord.js';
 
-import { Bot, Event, EventsTypes } from '../../structures/index.js';
+import { Bot, Context, Event } from '../../structures/index.js';
 
 export default class InteractionCreate extends Event {
     constructor(client: Bot, file: string) {
         super(client, file, {
-            name: EventsTypes.InteractionCreate,
+            name: 'interactionCreate',
         });
     }
 
-    public async run(interaction: CommandInteraction): Promise<void> {
+    public async run(interaction: any): Promise<void> {
         try {
             if (interaction.isCommand()) {
                 const commandName = interaction.commandName;
                 const command = this.client.commands.get(commandName);
                 if (!command) return;
 
-                await command.run(this.client, interaction);
+                const ctx = new Context(interaction, interaction.options.data);
+                ctx.setArgs(interaction.options.data);
+                await command.run(this.client, ctx, ctx.args);
             }
         } catch (error) {
             this.client.logger.error(error);

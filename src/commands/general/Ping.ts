@@ -1,6 +1,4 @@
-import { CommandInteraction } from 'discord.js';
-
-import { Bot, Command } from '../../structures/index.js';
+import { Bot, Command, Context } from '../../structures/index.js';
 
 export default class Ping extends Command {
     constructor(client: Bot) {
@@ -17,19 +15,19 @@ export default class Ping extends Command {
                 ru: 'пинг',
             },
             description: {
-                content: '🏓 | Get the bot latency',
+                content: 'Get the bot latency',
                 usage: 'ping',
                 examples: ['ping'],
             },
             descriptionLocalizations: {
-                fr: '🏓 | Obtiens la latence du bot.',
-                'es-ES': '🏓 | Obtén la latencia del bot',
-                de: '🏓 | Erhalte die Bot-Latenz',
-                it: '🏓 | Ottieni la latenza del bot',
-                ja: '🏓 | ボットのレイテンシを取得します。',
-                ko: '🏓 | 봇의 대기 시간 가져오기',
-                'zh-CN': '🏓 | 获取机器人延迟',
-                ru: '🏓 | Получить задержку бота',
+                fr: 'Obtiens la latence du bot.',
+                'es-ES': 'Obtén la latencia del bot',
+                de: 'Erhalte die Bot-Latenz',
+                it: 'Ottieni la latenza del bot',
+                ja: 'ボットのレイテンシを取得します。',
+                ko: '봇의 대기 시간 가져오기',
+                'zh-CN': '获取机器人延迟',
+                ru: 'Получить задержку бота',
             },
             category: 'general',
             permissions: {
@@ -41,12 +39,12 @@ export default class Ping extends Command {
             options: [],
         });
     }
-    async run(client: Bot, interaction: CommandInteraction): Promise<void> {
+    async run(client: Bot, ctx: Context): Promise<void> {
         const embed = client
             .embed()
             .setColor(this.client.color)
             .setDescription(`**Pong:** \`${Math.round(client.ws.ping)}ms\``);
 
-        await interaction.reply({ embeds: [embed] });
+        await ctx.sendMessage({ embeds: [embed] });
     }
 }

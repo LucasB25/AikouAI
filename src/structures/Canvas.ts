@@ -11,19 +11,12 @@ interface MergeImagesOptions {
 
 export class Canvas {
     public async mergeImages(options: MergeImagesOptions): Promise<Buffer> {
-        let tempFilePath: string | undefined;
+        let tempDirPath: string | undefined;
 
         try {
             const { width, height, images } = options;
 
-            if (
-                typeof width !== 'number' ||
-                width <= 0 ||
-                typeof height !== 'number' ||
-                height <= 0 ||
-                !Array.isArray(images) ||
-                images.length === 0
-            ) {
+            if (width <= 0 || height <= 0 || !Array.isArray(images) || images.length === 0) {
                 throw new Error('Invalid parameters for mergeImages');
             }
 
@@ -35,39 +28,37 @@ export class Canvas {
             const canvas = createCanvas(width, height);
             const ctx = canvas.getContext('2d');
 
-            tempFilePath = await fs.mkdtemp(`${tmpdir()}/temp`);
+            tempDirPath = await fs.mkdtemp(`${tmpdir()}/temp`);
 
-            await Promise.allSettled(
-                images.map(async (imageUrl, index) => {
-                    let tempFileName: string | undefined;
-                    try {
-                        const response = await request(imageUrl);
-                        if (response.statusCode !== 200) {
-                            throw new Error(`Failed to fetch image: ${imageUrl}`);
-                        }
-                        const buffer = await response.body.arrayBuffer();
-                        tempFileName = `${tempFilePath}/temp${index}.tmp`;
-                        await fs.writeFile(tempFileName, Buffer.from(buffer));
-                        const image = await loadImage(tempFileName);
-                        const x = (index % cols) * chunkWidth;
-                        const y = Math.floor(index / cols) * chunkHeight;
-                        ctx.drawImage(image, x, y, chunkWidth, chunkHeight);
-                    } catch (error) {
-                        throw new Error(`Error processing image ${index}: ${error}`);
-                    } finally {
-                        if (tempFileName) {
-                            await fs.unlink(tempFileName).catch(console.error);
-                        }
+            const promises = images.map(async (imageUrl, index) => {
+                const tempFileName = `${tempDirPath}/temp${index}.tmp`;
+
+                try {
+                    const response = await request(imageUrl);
+                    if (response.statusCode !== 200) {
+                        throw new Error(`Failed to fetch image: ${imageUrl}`);
                     }
-                })
-            );
+                    const buffer = await response.body.arrayBuffer();
+                    await fs.writeFile(tempFileName, Buffer.from(buffer));
+                    const image = await loadImage(tempFileName);
+                    const x = (index % cols) * chunkWidth;
+                    const y = Math.floor(index / cols) * chunkHeight;
+                    ctx.drawImage(image, x, y, chunkWidth, chunkHeight);
+                } catch (error) {
+                    throw new Error(`Error processing image ${index}: ${(error as Error).message}`);
+                } finally {
+                    await fs.unlink(tempFileName).catch(console.error);
+                }
+            });
+
+            await Promise.allSettled(promises);
 
             return canvas.toBuffer('image/png');
         } catch (error) {
-            throw new Error(`Error merging images: ${error}`);
+            throw new Error(`Error merging images: ${(error as Error).message}`);
         } finally {
-            if (tempFilePath) {
-                await fs.rm(tempFilePath, { recursive: true }).catch(console.error);
+            if (tempDirPath) {
+                await fs.rm(tempDirPath, { recursive: true }).catch(console.error);
             }
         }
     }
