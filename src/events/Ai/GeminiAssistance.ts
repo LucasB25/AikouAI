@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
 import { ChannelType, Message, TextChannel } from 'discord.js';
 
 import { Bot, Event } from '../../structures/index.js';
@@ -46,19 +46,20 @@ export default class MessageCreate extends Event {
                             },
                             safety_settings: [
                                 {
-                                    category: 'HARM_CATEGORY_HARASSMENT',
-                                    threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+                                    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+                                    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
                                 },
                                 {
-                                    category: 'HARM_CATEGORY_HATE_SPEECH',
-                                    threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+                                    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                                    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
                                 },
                                 {
-                                    category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
-                                    threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+                                    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                                    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
                                 },
                                 {
-                                    category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+                                    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+                                    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
                                 },
                             ],
                         } as any);
