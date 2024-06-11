@@ -1,6 +1,6 @@
-import { CommandInteraction } from 'discord.js';
+import type { CommandInteraction } from 'discord.js';
 
-import { Bot, Context, Event } from '../../structures/index.js';
+import { type Bot, Context, Event } from '../../structures/index.js';
 
 export default class InteractionCreate extends Event {
     constructor(client: Bot, file: string) {
@@ -26,10 +26,7 @@ export default class InteractionCreate extends Event {
             if (this.isNSFWError(error)) {
                 await this.handleNSFWError(interaction);
             } else {
-                await this.replyWithError(
-                    interaction,
-                    'There was an error while executing this command!'
-                );
+                await this.replyWithError(interaction, 'There was an error while executing this command!');
             }
         }
     }
@@ -37,8 +34,7 @@ export default class InteractionCreate extends Event {
     private isNSFWError(error: any): boolean {
         return (
             error instanceof Error &&
-            error.message ===
-                'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.'
+            error.message === 'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.'
         );
     }
 

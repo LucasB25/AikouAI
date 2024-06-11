@@ -1,18 +1,16 @@
 {
     "name": "AikouAI",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
         "start": "npm run build && node dist/index.js",
+        "build": "tsc --project tsconfig.json",
         "clean:windows": "rmdir /s /q dist",
         "clean:linux": "rm -rf dist",
-        "build": "tsc --project tsconfig.json",
-        "lint": "eslint . --cache --ext .js,.jsx,.ts,.tsx",
-        "lint:fix": "eslint . --fix --cache --ext .js,.jsx,.ts,.tsx",
-        "format": "prettier --check .",
-        "format:fix": "prettier --write ."
+        "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
+        "format": "biome check --apply-unsafe ./src"
     },
     "repository": {
         "type": "git",
@@ -23,14 +21,14 @@
     },
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
-        "@types/node": "^20.13.0",
+        "@types/node": "^20.14.2",
         "@types/signale": "^1.4.7",
-        "@typescript-eslint/eslint-plugin": "^7.11.0",
-        "@typescript-eslint/parser": "^7.11.0",
+        "@typescript-eslint/eslint-plugin": "^7.13.0",
+        "@typescript-eslint/parser": "^7.13.0",
         "eslint": "^8.57.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-unicorn": "^53.0.0",
-        "prettier": "^3.2.5",
+        "@biomejs/biome": "^1.8.1",
         "ts-node": "^10.9.2"
     },
     "keywords": [
@@ -56,10 +54,10 @@
     },
     "dependencies": {
         "@google/generative-ai": "^0.12.0",
-        "@napi-rs/canvas": "^0.1.52",
-        "discord.js": "^14.15.2",
+        "@napi-rs/canvas": "^0.1.53",
+        "discord.js": "^14.15.3",
         "dotenv": "^16.4.5",
-        "replicate": "^0.30.1",
+        "replicate": "^0.30.2",
         "signale": "^1.4.0",
         "undici": "^6.18.2"
     }

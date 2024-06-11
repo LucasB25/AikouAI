@@ -1,4 +1,4 @@
-import { Bot, Command, Context } from '../../structures/index.js';
+import { type Bot, Command, type Context } from '../../structures/index.js';
 
 export default class Invite extends Command {
     constructor(client: Bot) {
@@ -45,7 +45,7 @@ export default class Invite extends Command {
             .embed()
             .setColor(this.client.color)
             .setDescription(
-                `Invite me to your server with this link: [Invite](https://discord.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot%20applications.commands&permissions=8)`
+                `Invite me to your server with this link: [Invite](https://discord.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot%20applications.commands&permissions=8)`,
             );
 
         await ctx.sendMessage({ embeds: [embed] });

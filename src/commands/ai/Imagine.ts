@@ -1,6 +1,6 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
-import { Bot, Command, Context } from '../../structures/index.js';
+import { type Bot, Command, type Context } from '../../structures/index.js';
 
 export default class Imagine extends Command {
     constructor(client: Bot) {
@@ -174,12 +174,9 @@ export default class Imagine extends Command {
                 new ButtonBuilder()
                     .setLabel(`${i + 1}`)
                     .setStyle(ButtonStyle.Link)
-                    .setURL(prediction[i])
+                    .setURL(prediction[i]),
             ),
-            new ButtonBuilder()
-                .setLabel(`Support`)
-                .setStyle(ButtonStyle.Link)
-                .setURL('https://discord.gg/JeaQTqzsJw')
+            new ButtonBuilder().setLabel('Support').setStyle(ButtonStyle.Link).setURL('https://discord.gg/JeaQTqzsJw'),
         );
 
         await ctx.editMessage({ files: [attachment], components: [buttonRow], ephemeral: false });

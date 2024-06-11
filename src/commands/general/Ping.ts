@@ -1,4 +1,4 @@
-import { Bot, Command, Context } from '../../structures/index.js';
+import { type Bot, Command, type Context } from '../../structures/index.js';
 
 export default class Ping extends Command {
     constructor(client: Bot) {

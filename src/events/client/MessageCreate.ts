@@ -1,6 +1,6 @@
-import { Message, TextChannel } from 'discord.js';
+import { type Message, TextChannel } from 'discord.js';
 
-import { Bot, Event } from '../../structures/index.js';
+import { type Bot, Event } from '../../structures/index.js';
 
 export default class MessageCreate extends Event {
     constructor(client: Bot, file: string) {

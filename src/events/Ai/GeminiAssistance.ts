@@ -1,10 +1,10 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
-import { ChannelType, Message, TextChannel } from 'discord.js';
+import { ChannelType, type Message, TextChannel } from 'discord.js';
 
-import { Bot, Event } from '../../structures/index.js';
+import { type Bot, Event } from '../../structures/index.js';
 
 function truncateText(text: string, maxLength: number): string {
-    return text.length > maxLength ? text.substring(0, maxLength - 3) + '...' : text;
+    return text.length > maxLength ? `${text.substring(0, maxLength - 3)}...` : text;
 }
 
 export default class MessageCreate extends Event {
@@ -19,14 +19,11 @@ export default class MessageCreate extends Event {
             if (message.content.endsWith('?')) {
                 const threadName = message.content.trim();
                 const existingThread = message.guild?.channels.cache.find(
-                    channel =>
-                        channel.name === threadName && channel.type === ChannelType.PublicThread
+                    (channel) => channel.name === threadName && channel.type === ChannelType.PublicThread,
                 );
 
                 if (existingThread) {
-                    message.reply(
-                        `The information you are looking for is in the existing thread: ${existingThread}`
-                    );
+                    message.reply(`The information you are looking for is in the existing thread: ${existingThread}`);
                 } else {
                     try {
                         const threadName = truncateText(message.content, 100);
@@ -66,7 +63,7 @@ export default class MessageCreate extends Event {
 
                         thread.sendTyping();
 
-                        let chat = model.startChat({
+                        const chat = model.startChat({
                             history: [
                                 {
                                     role: 'user',
@@ -75,8 +72,8 @@ export default class MessageCreate extends Event {
                             ],
                         });
 
-                        let result = await chat.sendMessage(message.content);
-                        let response = result.response;
+                        const result = await chat.sendMessage(message.content);
+                        const response = result.response;
 
                         let generatedText = response.text();
 
@@ -96,9 +93,7 @@ export default class MessageCreate extends Event {
                             }
                         }
                     } catch (error) {
-                        throw new Error(
-                            `An error occurred while generating the response: ${error}`
-                        );
+                        throw new Error(`An error occurred while generating the response: ${error}`);
                     }
                 }
             }

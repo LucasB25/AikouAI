@@ -1,6 +1,6 @@
-import { ApplicationCommandOption, PermissionResolvable } from 'discord.js';
+import type { Bot } from './index.js';
+import type { ApplicationCommandOption, PermissionResolvable } from 'discord.js';
 
-import { Bot } from './index.js';
 
 interface CommandDescription {
     content: string;

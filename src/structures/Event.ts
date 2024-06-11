@@ -1,4 +1,4 @@
-import { Bot } from './index.js';
+import type { Bot } from './index.js';
 
 interface EventOptions {
     name: string;
