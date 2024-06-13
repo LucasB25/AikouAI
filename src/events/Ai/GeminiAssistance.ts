@@ -23,7 +23,7 @@ export default class MessageCreate extends Event {
         if (message.channel instanceof TextChannel) {
             const botMentioned = message.mentions.has(this.client.user);
 
-            if (botMentioned && message.content.endsWith('?')) {
+            if (botMentioned && /[.!?]$/.test(message.content)) {
                 const cleanContent = removeBotMention(message.content, this.client.user.id);
                 const threadName = truncateText(cleanContent, 100);
 
