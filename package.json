@@ -1,6 +1,6 @@
 {
     "name": "AikouAI",
-    "version": "1.5.6",
+    "version": "1.6.0",
     "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",

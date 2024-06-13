@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
-import { ChannelType, type Message, TextChannel, ThreadAutoArchiveDuration } from 'discord.js';
+import { ChannelType, Message, TextChannel, ThreadAutoArchiveDuration } from 'discord.js';
 
-import { type Bot, Event } from '../../structures/index.js';
+import { Bot, Event } from '../../structures/index.js';
 
 function truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? `${text.substring(0, maxLength - 3)}...` : text;
@@ -45,7 +45,7 @@ export default class MessageCreate extends Event {
                 const model = genAI.getGenerativeModel({
                     model: this.client.config.geminiModel,
                     generationConfig: {
-                        maxOutputTokens: 1900,
+                        maxOutputTokens: 1000,
                         temperature: 0.9,
                         topK: 1,
                         topP: 1,
@@ -66,14 +66,17 @@ export default class MessageCreate extends Event {
 
                 let generatedText = (await chat.sendMessage(message.content)).response.text();
 
-                while (generatedText.length > 0) {
-                    let lastIndex = generatedText.lastIndexOf(' ', 1900);
-                    if (lastIndex === -1 || lastIndex >= 1900) lastIndex = 1900;
+                let lastIndex = generatedText.lastIndexOf('\n', 1900);
+                if (lastIndex === -1 || lastIndex >= 1900) lastIndex = 1900;
 
-                    const substring = generatedText.substring(0, lastIndex).trim();
-                    await thread.send(substring);
-                    generatedText = generatedText.substring(lastIndex).trim();
+                const substring = generatedText.substring(0, lastIndex).trim();
+                await thread.send(substring);
+
+                const remainingText = generatedText.substring(lastIndex).trim();
+                if (remainingText.length > 0) {
+                    await thread.send(remainingText);
                 }
+
             } catch (error) {
                 throw new Error(`An error occurred while generating or sending the response: ${error}`);
             }
