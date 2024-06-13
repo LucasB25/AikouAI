@@ -150,7 +150,7 @@ export default class Imagine extends Command {
             return;
         }
 
-        await ctx.sendDeferMessage({ fetchReply: true });
+        await ctx.sendDeferMessage('Generating...');
         await ctx.editMessage({ content: `**${prompt}** - ${client.user.toString()}` });
 
         const prediction = (await client.replicate.run(this.client.config.replicateModel, {
@@ -179,6 +179,6 @@ export default class Imagine extends Command {
             new ButtonBuilder().setLabel('Support').setStyle(ButtonStyle.Link).setURL('https://discord.gg/JeaQTqzsJw'),
         );
 
-        await ctx.editMessage({ files: [attachment], components: [buttonRow], ephemeral: false });
+        await ctx.editMessage({ files: [attachment], components: [buttonRow] });
     }
 }

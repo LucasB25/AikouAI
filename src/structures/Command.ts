@@ -1,7 +1,6 @@
 import type { Bot } from './index.js';
 import type { ApplicationCommandOption, PermissionResolvable } from 'discord.js';
 
-
 interface CommandDescription {
     content: string;
     usage: string;

@@ -7,6 +7,11 @@ function truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? `${text.substring(0, maxLength - 3)}...` : text;
 }
 
+function removeBotMention(text: string, botId: string): string {
+    const mention = `<@${botId}>`;
+    return text.replace(mention, '').trim();
+}
+
 export default class MessageCreate extends Event {
     constructor(client: Bot, file: string) {
         super(client, file, {
@@ -16,8 +21,12 @@ export default class MessageCreate extends Event {
 
     public async run(message: Message): Promise<void> {
         if (message.channel instanceof TextChannel) {
-            if (message.content.endsWith('?')) {
-                const threadName = message.content.trim();
+            const botMentioned = message.mentions.has(this.client.user);
+
+            if (botMentioned && message.content.endsWith('?')) {
+                const cleanContent = removeBotMention(message.content, this.client.user.id);
+                const threadName = truncateText(cleanContent, 100);
+
                 const existingThread = message.guild?.channels.cache.find(
                     (channel) => channel.name === threadName && channel.type === ChannelType.PublicThread,
                 );
@@ -26,7 +35,6 @@ export default class MessageCreate extends Event {
                     message.reply(`The information you are looking for is in the existing thread: ${existingThread}`);
                 } else {
                     try {
-                        const threadName = truncateText(message.content, 100);
                         const thread = await message.startThread({
                             name: threadName,
                             autoArchiveDuration: 60,

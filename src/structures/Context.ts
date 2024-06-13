@@ -85,7 +85,7 @@ export default class Context {
     }
     public async sendDeferMessage(content: string | MessagePayload | MessageCreateOptions): Promise<Message> {
         if (this.isInteraction) {
-            this.msg = await this.interaction.deferReply({ ephemeral: true });
+            this.msg = await this.interaction.deferReply({ ephemeral: false });
             return this.msg;
         }
         this.msg = await (this.message.channel as TextChannel).send(content);
