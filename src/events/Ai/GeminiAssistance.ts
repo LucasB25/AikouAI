@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
-import { ChannelType, Message, TextChannel, ThreadAutoArchiveDuration } from 'discord.js';
+import { ChannelType, type Message, TextChannel, ThreadAutoArchiveDuration } from 'discord.js';
 
-import { Bot, Event } from '../../structures/index.js';
+import { type Bot, Event } from '../../structures/index.js';
 
 function truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? `${text.substring(0, maxLength - 3)}...` : text;
@@ -54,8 +54,14 @@ export default class MessageCreate extends Event {
                         safety_settings: [
                             { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
                             { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-                            { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-                            { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+                            {
+                                category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                                threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+                            },
+                            {
+                                category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+                                threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+                            },
                         ],
                     } as any);
 
@@ -65,7 +71,7 @@ export default class MessageCreate extends Event {
                         history: [{ role: 'user', parts: [{ text: message.content }] }],
                     });
 
-                    let generatedText = (await chat.sendMessage(message.content)).response.text();
+                    const generatedText = (await chat.sendMessage(message.content)).response.text();
 
                     let lastIndex = generatedText.lastIndexOf('\n', 1900);
                     if (lastIndex === -1 || lastIndex >= 1900) lastIndex = 1900;
@@ -77,7 +83,6 @@ export default class MessageCreate extends Event {
                     if (remainingText.length > 0) {
                         await thread.send(remainingText);
                     }
-
                 } catch (error) {
                     throw new Error(`An error occurred while generating or sending the response: ${error}`);
                 }
