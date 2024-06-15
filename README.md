@@ -68,7 +68,7 @@ or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/Aik
 ```bash
 TOKEN= #Discord Bot Token
 CLIENT_ID= #Discord Bot Client ID
-Activity=/imagine
+Activity=/help - imagine
 
 #For REPLICATE
 REPLICATE_TOKEN= #Replicate Token from https://replicate.com/signin
