@@ -1,6 +1,6 @@
 {
     "name": "AikouAI",
-    "version": "1.6.7",
+    "version": "1.6.8",
     "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",
@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
+        "@biomejs/biome": "^1.8.1",
         "@types/node": "^20.14.2",
         "@types/signale": "^1.4.7",
         "@typescript-eslint/eslint-plugin": "^7.13.0",
@@ -28,7 +29,6 @@
         "eslint": "^8.57.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-unicorn": "^54.0.0",
-        "@biomejs/biome": "^1.8.1",
         "ts-node": "^10.9.2"
     },
     "keywords": [

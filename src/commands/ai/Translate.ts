@@ -56,8 +56,8 @@ export default class Translate extends Command {
                 .setColor(this.client.color)
                 .setTitle('Translation')
                 .addFields(
-                    { name: `Original Text (${sourceLanguageName})`, value: `\`\`\`${text}\`\`\``, inline: true },
-                    { name: `Translated Text (${targetLanguageName})`, value: `\`\`\`${translatedText}\`\`\``, inline: true },
+                    { name: `Original Text - ${sourceLanguageName}`, value: `\`\`\`${text}\`\`\``, inline: true },
+                    { name: `Translated Text - ${targetLanguageName}`, value: `\`\`\`${translatedText}\`\`\``, inline: true },
                 )
                 .setTimestamp()
                 .setFooter({ text: 'Translation provided by Google Generative AI' });
@@ -68,6 +68,7 @@ export default class Translate extends Command {
 
             await ctx.editMessage({ embeds: [embed], components: [buttonRow] });
         } catch (error) {
+            console.error('Translation Error:', error);
             await ctx.editMessage({ content: `An error occurred while translating: ${error.message}` });
         }
     }
@@ -77,10 +78,10 @@ export default class Translate extends Command {
         const model = genAI.getGenerativeModel({
             model: this.client.config.geminiModel,
             generationConfig: {
-                maxOutputTokens: 1000,
-                temperature: 0.9,
+                maxOutputTokens: 100,
+                temperature: 0.7,
                 topK: 1,
-                topP: 1,
+                topP: 0.95,
             },
             safety_settings: [
                 { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
@@ -101,7 +102,9 @@ export default class Translate extends Command {
                 history: [
                     {
                         role: 'user',
-                        parts: [{ text: `Translate the following text to ${targetLanguage}: ${text}` }],
+                        parts: [
+                            { text: `Translate the following text to ${targetLanguage} without adding an example or challenge: ${text}` },
+                        ],
                     },
                 ],
             })
@@ -143,13 +146,25 @@ export default class Translate extends Command {
                 history: [
                     {
                         role: 'user',
-                        parts: [{ text: `Detect the language of the following text: ${text}` }],
+                        parts: [
+                            {
+                                text: `Detect the language of the following text, your answer must contain only one word the language you have detected without any abbreviations: ${text}`,
+                            },
+                        ],
                     },
                 ],
             })
             .sendMessage(text);
 
-        const detectedLanguageName = response.response.text();
+        if (!response.response) {
+            throw new Error('Language detection API did not return a response.');
+        }
+
+        const detectedLanguageName = response.response.text().trim();
+
+        if (!detectedLanguageName) {
+            throw new Error('Failed to detect the language.');
+        }
 
         return detectedLanguageName;
     }
