@@ -18,7 +18,7 @@
   <p align="center">AikouAI and TypeScript.
     <br />
     <br />
-        <a href="https://discord.gg/AhUJa2kdAr">Serveur Support</a>
+        <a href="https://discord.gg/AhUJa2kdAr">Server Support</a>
     ·
     <a href="https://github.com/LucasB25/AikouAI/issues">Report Bug & Request Feature</a>
   </p>
@@ -36,7 +36,7 @@ AikouAI is a versatile Discord bot that now also offers text-to-text capabilitie
 
 -   Create [Replicate](https://replicate.com/) account and get token
 
--   Create [Gemini](https://makersuite.google.com/) account and get token (optional)
+-   Create [Gemini](https://makersuite.google.com/) account and get token
 
 ## 🚀 Installation from source
 
@@ -76,7 +76,7 @@ REPLICATE_MODEL=bytedance/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ff
 
 #For GEMINI
 GEMINI_KEY= #GEMINI key from https://makersuite.google.com/
-GEMINI_MODEL=gemini-1.5-pro-latest
+GEMINI_MODEL=gemini-1.5-pro-latest # Or gemini-1.5-flash-latest
 ```
 
 5. Run the bot:
