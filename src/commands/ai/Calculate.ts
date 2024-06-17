@@ -52,7 +52,6 @@ export default class Calculate extends Command {
 
             const embed = client
                 .embed()
-                .setColor(this.client.color)
                 .setTitle('Calculation Result')
                 .addFields(
                     { name: 'Expression', value: `\`\`\`${expression}\`\`\``, inline: true },
