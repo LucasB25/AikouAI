@@ -49,7 +49,6 @@ export default class ConvertCommand extends Command {
 
             const embed = this.client
                 .embed()
-                .setColor(this.client.color)
                 .setTitle('Conversion Result')
                 .addFields(
                     { name: 'Conversion', value: `\`\`\`${query}\`\`\``, inline: true },
