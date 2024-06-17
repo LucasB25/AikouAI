@@ -113,7 +113,6 @@ export default class Translate extends Command {
 
             const embed = client
                 .embed()
-                .setColor(this.client.color)
                 .setTitle('Translation')
                 .addFields(
                     { name: `Original Text - ${sourceLanguageName}`, value: `\`\`\`${text}\`\`\``, inline: true },
