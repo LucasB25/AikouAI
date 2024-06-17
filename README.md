@@ -102,7 +102,7 @@ Your contribution will be reviewed by the project maintainers, and any necessary
 Thanks goes to these wonderful people :
 
 <a href="https://github.com/LucasB25/AikouAI/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=LucasB25/AikouAI" alt="contributors" width="500" />
+  <img src="https://contrib.rocks/image?repo=LucasB25/AikouAI" />
 </a>
 
 [version-shield]: https://img.shields.io/github/package-json/v/LucasB25/AikouAI?style=for-the-badge
