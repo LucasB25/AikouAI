@@ -53,17 +53,15 @@ export default class About extends Command {
             new ButtonBuilder().setLabel('Support Server').setURL('https://discord.gg/JeaQTqzsJw').setStyle(ButtonStyle.Link),
         );
 
-        const embed = client.embed()
-            .setAuthor({ name: 'AikouAI' })
-            .addFields(
-                { name: 'Creator', value: '[LucasB25](https://github.com/lucasb25)', inline: true },
-                {
-                    name: 'Repository',
-                    value: '[Here](https://github.com/lucasb25/AikouAI)',
-                    inline: true,
-                },
-                { name: 'Support', value: '[Here](https://discord.gg/AhUJa2kdAr)', inline: true },
-            );
+        const embed = client.embed().setAuthor({ name: 'AikouAI' }).addFields(
+            { name: 'Creator', value: '[LucasB25](https://github.com/lucasb25)', inline: true },
+            {
+                name: 'Repository',
+                value: '[Here](https://github.com/lucasb25/AikouAI)',
+                inline: true,
+            },
+            { name: 'Support', value: '[Here](https://discord.gg/AhUJa2kdAr)', inline: true },
+        );
 
         await ctx.sendMessage({ embeds: [embed], components: [row] });
     }

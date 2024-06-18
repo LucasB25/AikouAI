@@ -60,7 +60,8 @@ export default class Help extends Command {
             commandList += '\n';
         });
 
-        const embed = client.embed()
+        const embed = client
+            .embed()
             .setAuthor({ name: this.client.user.username })
             .setTitle('Help - List of Commands')
             .setDescription(commandList)

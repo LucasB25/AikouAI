@@ -22,10 +22,10 @@
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
         "@biomejs/biome": "^1.8.1",
-        "@types/node": "^20.14.2",
+        "@types/node": "^20.14.5",
         "@types/signale": "^1.4.7",
-        "@typescript-eslint/eslint-plugin": "^7.13.0",
-        "@typescript-eslint/parser": "^7.13.0",
+        "@typescript-eslint/eslint-plugin": "^7.13.1",
+        "@typescript-eslint/parser": "^7.13.1",
         "eslint": "^8.57.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-unicorn": "^54.0.0",
@@ -53,12 +53,12 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.12.0",
+        "@google/generative-ai": "^0.13.0",
         "@napi-rs/canvas": "^0.1.53",
         "discord.js": "^14.15.3",
         "dotenv": "^16.4.5",
         "replicate": "^0.30.2",
         "signale": "^1.4.0",
-        "undici": "^6.19.0"
+        "undici": "^6.19.2"
     }
 }
