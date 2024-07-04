@@ -57,7 +57,7 @@
         "@napi-rs/canvas": "^0.1.53",
         "discord.js": "^14.15.3",
         "dotenv": "^16.4.5",
-        "replicate": "^0.30.2",
+        "replicate": "^0.31.0",
         "signale": "^1.4.0",
         "undici": "^6.19.2"
     }
