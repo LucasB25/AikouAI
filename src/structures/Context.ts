@@ -1,4 +1,3 @@
-import type { Bot } from './index.js';
 import {
     type APIInteractionGuildMember,
     ChatInputCommandInteraction,
@@ -17,7 +16,8 @@ import {
     type PartialDMChannel,
     type TextChannel,
     type User,
-} from 'discord.js';
+} from "discord.js";
+import type { Bot } from "./index.js";
 
 export default class Context {
     public ctx: CommandInteraction | Message;
@@ -64,12 +64,12 @@ export default class Context {
     }
     public async sendMessage(content: string | MessagePayload | MessageCreateOptions | InteractionReplyOptions): Promise<Message> {
         if (this.isInteraction) {
-            if (typeof content === 'string' || isInteractionReplyOptions(content)) {
+            if (typeof content === "string" || isInteractionReplyOptions(content)) {
                 this.msg = await this.interaction.reply(content);
                 return this.msg;
             }
         }
-        if (typeof content === 'string' || isMessagePayload(content)) {
+        if (typeof content === "string" || isMessagePayload(content)) {
             this.msg = await (this.message.channel as TextChannel).send(content);
             return this.msg;
         }
@@ -93,11 +93,11 @@ export default class Context {
     }
     public async sendFollowUp(content: string | MessagePayload | MessageCreateOptions | InteractionReplyOptions): Promise<void> {
         if (this.isInteraction) {
-            if (typeof content === 'string' || isInteractionReplyOptions(content)) {
+            if (typeof content === "string" || isInteractionReplyOptions(content)) {
                 await this.interaction.followUp(content);
             }
         }
-        if (typeof content === 'string' || isMessagePayload(content)) {
+        if (typeof content === "string" || isMessagePayload(content)) {
             this.msg = await (this.message.channel as TextChannel).send(content);
         }
     }

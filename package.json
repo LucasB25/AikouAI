@@ -1,6 +1,6 @@
 {
     "name": "AikouAI",
-    "version": "1.10.1",
+    "version": "1.11.2",
     "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",
@@ -9,8 +9,8 @@
         "build": "tsc --project tsconfig.json",
         "clean:windows": "rmdir /s /q dist",
         "clean:linux": "rm -rf dist",
-        "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
-        "format": "biome check --apply-unsafe ./src"
+        "lint": "biome lint --write ./src",
+        "format": "biome format --write ./src"
     },
     "repository": {
         "type": "git",
@@ -21,15 +21,11 @@
     },
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
-        "@biomejs/biome": "^1.8.1",
-        "@types/node": "^20.14.5",
+        "@biomejs/biome": "^1.8.3",
+        "@types/node": "^20.14.9",
         "@types/signale": "^1.4.7",
-        "@typescript-eslint/eslint-plugin": "^7.13.1",
-        "@typescript-eslint/parser": "^7.13.1",
-        "eslint": "^8.57.0",
-        "eslint-plugin-import": "^2.29.1",
-        "eslint-plugin-unicorn": "^54.0.0",
-        "ts-node": "^10.9.2"
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.3"
     },
     "keywords": [
         "discord",
@@ -43,6 +39,12 @@
     ],
     "author": "LucasB25",
     "license": "GPL-3.0",
+    "lint-staged": {
+        "*.ts": [
+          "biome check --apply",
+          "biome format --write"
+        ]
+      },
     "signale": {
         "displayScope": true,
         "displayBadge": true,
@@ -53,12 +55,13 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.13.0",
+        "@google/generative-ai": "^0.14.1",
         "@napi-rs/canvas": "^0.1.53",
         "discord.js": "^14.15.3",
         "dotenv": "^16.4.5",
-        "replicate": "^0.30.2",
+        "replicate": "^0.31.1",
         "signale": "^1.4.0",
-        "undici": "^6.19.2"
+        "undici": "^6.19.2",
+        "lint-staged": "^15.2.7"
     }
 }

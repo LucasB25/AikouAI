@@ -1,12 +1,12 @@
-import { type ClientOptions, Partials } from 'discord.js';
+import { type ClientOptions, Partials } from "discord.js";
 
-import config from './config.js';
-import Bot from './structures/Client.js';
+import config from "./config.js";
+import Bot from "./structures/Client.js";
 
 const createClientOptions = (): ClientOptions => ({
     intents: 131059,
     allowedMentions: {
-        parse: ['users', 'roles', 'everyone'],
+        parse: ["users", "roles", "everyone"],
         repliedUser: false,
     },
     partials: [
@@ -21,10 +21,10 @@ const createClientOptions = (): ClientOptions => ({
 
 const setupEventListeners = (client: Bot): void => {
     const { logger } = client;
-    process.on('unhandledRejection', (error: Error) => logger.error(error));
-    process.on('uncaughtException', (error: Error) => logger.error(error));
-    process.on('warning', (warning: Error) => logger.warn(warning));
-    process.once('exit', () => logger.warn('Process exited!'));
+    process.on("unhandledRejection", (error: Error) => logger.error(error));
+    process.on("uncaughtException", (error: Error) => logger.error(error));
+    process.on("warning", (warning: Error) => logger.warn(warning));
+    process.once("exit", () => logger.warn("Process exited!"));
 };
 
 const clientOptions = createClientOptions();

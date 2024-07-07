@@ -1,4 +1,4 @@
-import type { Bot } from './index.js';
+import type { Bot } from "./index.js";
 
 interface EventOptions {
     name: string;
@@ -17,7 +17,7 @@ export default class Event {
         this.file = file;
         this.name = name;
         this.one = one;
-        this.fileName = file.split('.')[0];
+        this.fileName = file.split(".")[0];
     }
 
     public async run(..._args: unknown[]): Promise<void> {

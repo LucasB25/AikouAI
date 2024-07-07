@@ -1,31 +1,71 @@
-import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
-import { type Bot, Command, type Context } from '../../structures/index.js';
+import { type Bot, Command, type Context } from "../../structures/index.js";
 
 export default class Calculate extends Command {
     constructor(client: Bot) {
         super(client, {
-            name: 'calculate',
+            name: "calculate",
+            nameLocalizations: {
+                fr: "calculer",
+                "es-ES": "calcular",
+                de: "berechnen",
+                it: "calcolare",
+                ja: "計算",
+                ko: "계산",
+                "zh-CN": "计算",
+                ru: "посчитать",
+            },
             description: {
-                content: 'Solves a mathematical expression',
-                usage: 'calculate <expression>',
+                content: "Solves a mathematical expression",
+                usage: "calculate <expression>",
                 examples: [
-                    'calculate sum of first 100 terms of arithmetic series with first term 1 and common difference 3',
-                    'calculate solve for x: x^2 - 5x + 6 = 0',
+                    "calculate sum of first 100 terms of arithmetic series with first term 1 and common difference 3",
+                    "calculate solve for x: x^2 - 5x + 6 = 0",
                 ],
             },
-            category: 'ai',
+            descriptionLocalizations: {
+                fr: "Résout une expression mathématique",
+                "es-ES": "Resuelve una expresión matemática",
+                de: "Löst einen mathematischen Ausdruck",
+                it: "Risolve un'espressione matematica",
+                ja: "数式を解きます",
+                ko: "수학식을 해결합니다",
+                "zh-CN": "解决数学表达式",
+                ru: "Решает математическое выражение",
+            },
+            category: "ai",
             cooldown: 3,
             permissions: {
-                client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
-                user: ['SendMessages'],
+                client: ["SendMessages", "ViewChannel", "EmbedLinks"],
+                user: ["SendMessages"],
                 dev: false,
             },
             options: [
                 {
-                    name: 'expression',
-                    description: 'The mathematical expression to solve',
+                    name: "expression",
+                    nameLocalizations: {
+                        fr: "expression",
+                        "es-ES": "expresión",
+                        de: "ausdruck",
+                        it: "espressione",
+                        ja: "数式",
+                        ko: "수식",
+                        "zh-CN": "表达式",
+                        ru: "выражение",
+                    },
+                    description: "The mathematical expression to solve",
+                    descriptionLocalizations: {
+                        fr: "L'expression mathématique à résoudre",
+                        "es-ES": "La expresión matemática a resolver",
+                        de: "Der mathematische Ausdruck, der gelöst werden soll",
+                        it: "L'espressione matematica da risolvere",
+                        ja: "解く数式",
+                        ko: "해결할 수학식",
+                        "zh-CN": "要解决的数学表达式",
+                        ru: "Математическое выражение для решения",
+                    },
                     type: 3,
                     required: true,
                 },
@@ -34,39 +74,39 @@ export default class Calculate extends Command {
     }
 
     async run(client: Bot, ctx: Context, args: string[]): Promise<void> {
-        const expression = args.join(' ');
+        const expression = args.join(" ");
 
         if (!expression) {
-            await ctx.sendMessage({ content: 'Please provide a mathematical expression to solve.' });
+            await ctx.sendMessage({ content: "Please provide a mathematical expression to solve." });
             return;
         }
 
-        await ctx.sendDeferMessage('Calculating...');
+        await ctx.sendDeferMessage("Calculating...");
 
         try {
             const result = await this.solveMathExpression(expression);
 
             if (!this.isValidMathResult(result)) {
-                throw new Error('Invalid mathematical result.');
+                throw new Error("Invalid mathematical result.");
             }
 
             const embed = client
                 .embed()
-                .setTitle('Calculation Result')
+                .setTitle("Calculation Result")
                 .addFields(
-                    { name: 'Expression', value: `\`\`\`${expression}\`\`\``, inline: true },
-                    { name: 'Result', value: `\`\`\`${result}\`\`\``, inline: true },
+                    { name: "Expression", value: `\`\`\`${expression}\`\`\``, inline: true },
+                    { name: "Result", value: `\`\`\`${result}\`\`\``, inline: true },
                 )
                 .setTimestamp()
-                .setFooter({ text: 'Calculation provided by Google Generative AI' });
+                .setFooter({ text: "Calculation provided by Google Generative AI" });
 
             const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
-                new ButtonBuilder().setLabel('Support').setStyle(ButtonStyle.Link).setURL('https://discord.gg/JeaQTqzsJw'),
+                new ButtonBuilder().setLabel("Support").setStyle(ButtonStyle.Link).setURL("https://discord.gg/JeaQTqzsJw"),
             );
 
             await ctx.editMessage({ embeds: [embed], components: [buttonRow] });
         } catch (error) {
-            console.error('Calculation Error:', error);
+            console.error("Calculation Error:", error);
             await ctx.editMessage({ content: `An error occurred while calculating: ${error.message}` });
         }
     }
@@ -84,14 +124,8 @@ export default class Calculate extends Command {
             safety_settings: [
                 { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
                 { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-                {
-                    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-                    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-                },
-                {
-                    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-                    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-                },
+                { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+                { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
             ],
         } as any);
 
@@ -99,7 +133,7 @@ export default class Calculate extends Command {
             .startChat({
                 history: [
                     {
-                        role: 'user',
+                        role: "user",
                         parts: [
                             {
                                 text: `Solve the following mathematical expression: ${expression}. Provide only the result. If you determine that the requested mathematical expression has no relevance to mathematics, indicate that the posed expression is incorrect.`,
@@ -110,13 +144,10 @@ export default class Calculate extends Command {
             })
             .sendMessage(expression);
 
-        const result = response.response.text().trim();
-        return result;
+        return response.response.text().trim();
     }
+
     private isValidMathResult(result: string): boolean {
-        // Implement validation logic to check if the result is a valid mathematical expression
-        // Here you can add specific checks based on the expected format of a mathematical result
-        // For simplicity, this example checks if the result contains digits or basic operators
-        return /[0-9+\-*/^()=.]/.test(result); // Example: Checks if the result contains digits or operators
+        return /^[0-9+\-*/^().= ]+$/.test(result);
     }
 }

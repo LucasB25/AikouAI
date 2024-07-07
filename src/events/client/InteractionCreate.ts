@@ -1,11 +1,11 @@
-import type { CommandInteraction } from 'discord.js';
+import type { CommandInteraction } from "discord.js";
 
-import { type Bot, Context, Event } from '../../structures/index.js';
+import { type Bot, Context, Event } from "../../structures/index.js";
 
 export default class InteractionCreate extends Event {
     constructor(client: Bot, file: string) {
         super(client, file, {
-            name: 'interactionCreate',
+            name: "interactionCreate",
         });
     }
 
@@ -26,7 +26,7 @@ export default class InteractionCreate extends Event {
             if (this.isNSFWError(error)) {
                 await this.handleNSFWError(interaction);
             } else {
-                await this.replyWithError(interaction, 'There was an error while executing this command!');
+                await this.replyWithError(interaction, "There was an error while executing this command!");
             }
         }
     }
@@ -34,19 +34,19 @@ export default class InteractionCreate extends Event {
     private isNSFWError(error: any): boolean {
         return (
             error instanceof Error &&
-            error.message === 'Prediction failed: NSFW content detected. Try running it again, or try a different prompt.'
+            error.message === "Prediction failed: NSFW content detected. Try running it again, or try a different prompt."
         );
     }
 
     private async handleNSFWError(interaction: CommandInteraction): Promise<void> {
-        await interaction[interaction.replied ? 'editReply' : 'reply']({
-            content: 'NSFW content detected. You can\'t generate NSFW images!',
+        await interaction[interaction.replied ? "editReply" : "reply"]({
+            content: "NSFW content detected. You can't generate NSFW images!",
             ephemeral: true,
         });
     }
 
     private async replyWithError(interaction: CommandInteraction, message: string): Promise<void> {
-        await interaction[interaction.replied ? 'editReply' : 'reply']({
+        await interaction[interaction.replied ? "editReply" : "reply"]({
             content: message,
             ephemeral: true,
         });

@@ -1,28 +1,68 @@
-import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
-import { type Bot, Command, type Context } from '../../structures/index.js';
+import { type Bot, Command, type Context } from "../../structures/index.js";
 
 export default class ConvertCommand extends Command {
     constructor(client: Bot) {
         super(client, {
-            name: 'convert',
-            description: {
-                content: 'Converts units of measurement or currencies',
-                usage: 'convert <amount> <unit/currency> to <unit/currency>',
-                examples: ['convert 100 USD to EUR', 'convert 5 kilometers to miles'],
+            name: "convert",
+            nameLocalizations: {
+                fr: "convertir",
+                "es-ES": "convertir",
+                de: "konvertieren",
+                it: "convertire",
+                ja: "変換",
+                ko: "변환",
+                "zh-CN": "转换",
+                ru: "конвертировать",
             },
-            category: 'ai',
+            description: {
+                content: "Converts units of measurement or currencies",
+                usage: "convert <amount> <unit/currency> to <unit/currency>",
+                examples: ["convert 100 USD to EUR", "convert 5 kilometers to miles"],
+            },
+            descriptionLocalizations: {
+                fr: "Convertit des unités de mesure ou des devises",
+                "es-ES": "Convierte unidades de medida o monedas",
+                de: "Konvertiert Maßeinheiten oder Währungen",
+                it: "Converte unità di misura o valute",
+                ja: "単位や通貨を変換します",
+                ko: "측정 단위나 통화를 변환합니다",
+                "zh-CN": "转换计量单位或货币",
+                ru: "Конвертирует единицы измерения или валюты",
+            },
+            category: "ai",
             cooldown: 3,
             permissions: {
-                client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
-                user: ['SendMessages'],
+                client: ["SendMessages", "ViewChannel", "EmbedLinks"],
+                user: ["SendMessages"],
                 dev: false,
             },
             options: [
                 {
-                    name: 'conversion',
-                    description: 'The conversion query',
+                    name: "conversion",
+                    nameLocalizations: {
+                        fr: "conversion",
+                        "es-ES": "conversión",
+                        de: "umrechnung",
+                        it: "conversione",
+                        ja: "変換",
+                        ko: "변환",
+                        "zh-CN": "转换",
+                        ru: "конверсия",
+                    },
+                    description: "The conversion query",
+                    descriptionLocalizations: {
+                        fr: "La requête de conversion",
+                        "es-ES": "La consulta de conversión",
+                        de: "Die Umrechnungsanfrage",
+                        it: "La richiesta di conversione",
+                        ja: "変換クエリ",
+                        ko: "변환 쿼리",
+                        "zh-CN": "转换查询",
+                        ru: "Запрос на конвертацию",
+                    },
                     type: 3,
                     required: true,
                 },
@@ -31,39 +71,39 @@ export default class ConvertCommand extends Command {
     }
 
     async run(_client: Bot, ctx: Context, args: string[]): Promise<void> {
-        const query = args.join(' ');
+        const query = args.join(" ");
 
         if (!query) {
-            await ctx.sendMessage({ content: 'Please provide a conversion query.' });
+            await ctx.sendMessage({ content: "Please provide a conversion query." });
             return;
         }
 
-        await ctx.sendDeferMessage('Converting...');
+        await ctx.sendDeferMessage("Converting...");
 
         try {
             const conversionResult = await this.convertQuery(query);
 
             if (!this.isValidConversionResult(conversionResult)) {
-                throw new Error('Invalid conversion result.');
+                throw new Error("Invalid conversion result.");
             }
 
             const embed = this.client
                 .embed()
-                .setTitle('Conversion Result')
+                .setTitle("Conversion Result")
                 .addFields(
-                    { name: 'Conversion', value: `\`\`\`${query}\`\`\``, inline: true },
-                    { name: 'Result', value: `\`\`\`${conversionResult}\`\`\``, inline: true },
+                    { name: "Conversion", value: `\`\`\`${query}\`\`\``, inline: true },
+                    { name: "Result", value: `\`\`\`${conversionResult}\`\`\``, inline: true },
                 )
                 .setTimestamp()
-                .setFooter({ text: 'Calculation provided by Google Generative AI' });
+                .setFooter({ text: "Calculation provided by Google Generative AI" });
 
             const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
-                new ButtonBuilder().setLabel('Support').setStyle(ButtonStyle.Link).setURL('https://discord.gg/JeaQTqzsJw'),
+                new ButtonBuilder().setLabel("Support").setStyle(ButtonStyle.Link).setURL("https://discord.gg/JeaQTqzsJw"),
             );
 
             await ctx.editMessage({ embeds: [embed], components: [buttonRow] });
         } catch (error) {
-            console.error('Conversion Error:', error);
+            console.error("Conversion Error:", error);
             await ctx.editMessage({ content: `An error occurred during conversion: ${error.message}` });
         }
     }
@@ -90,7 +130,7 @@ export default class ConvertCommand extends Command {
             .startChat({
                 history: [
                     {
-                        role: 'user',
+                        role: "user",
                         parts: [{ text: `Convert the following: ${query}. Provide only the result.` }],
                     },
                 ],
@@ -98,14 +138,13 @@ export default class ConvertCommand extends Command {
             .sendMessage(query);
 
         if (!response.response) {
-            throw new Error('Conversion AI did not return a response.');
+            throw new Error("Conversion AI did not return a response.");
         }
 
-        return response.response.text();
+        return response.response.text().trim();
     }
+
     private isValidConversionResult(result: string): boolean {
-        // Example of validation: Check if the result contains digits or specific units
-        // Here you can implement more specific validation based on the expected format
-        return /\d/.test(result); // Checks if there are digits in the result
+        return /\d/.test(result);
     }
 }

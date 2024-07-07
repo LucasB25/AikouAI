@@ -1,15 +1,15 @@
-import pkg from 'signale';
+import pkg from "signale";
 const { Signale } = pkg;
 
 enum LogLevel {
-    INFO = 'info',
-    WARN = 'warn',
-    ERROR = 'error',
-    DEBUG = 'debug',
-    SUCCESS = 'success',
-    LOG = 'log',
-    PAUSE = 'pause',
-    START = 'start',
+    INFO = "info",
+    WARN = "warn",
+    ERROR = "error",
+    DEBUG = "debug",
+    SUCCESS = "success",
+    LOG = "log",
+    PAUSE = "pause",
+    START = "start",
 }
 
 interface LoggerOptions {
@@ -24,16 +24,16 @@ const defaultOptions: LoggerOptions = {
     disabled: false,
     interactive: false,
     logLevel: LogLevel.INFO,
-    scope: 'AikouAI',
+    scope: "AikouAI",
     types: {
-        [LogLevel.INFO]: { badge: 'ℹ', color: 'blue', label: 'info' },
-        [LogLevel.WARN]: { badge: '⚠', color: 'yellow', label: 'warn' },
-        [LogLevel.ERROR]: { badge: '✖', color: 'red', label: 'error' },
-        [LogLevel.DEBUG]: { badge: '🐛', color: 'magenta', label: 'debug' },
-        [LogLevel.SUCCESS]: { badge: '✔', color: 'green', label: 'success' },
-        [LogLevel.LOG]: { badge: '📝', color: 'white', label: 'log' },
-        [LogLevel.PAUSE]: { badge: '⏸', color: 'yellow', label: 'pause' },
-        [LogLevel.START]: { badge: '▶', color: 'green', label: 'start' },
+        [LogLevel.INFO]: { badge: "ℹ", color: "blue", label: "info" },
+        [LogLevel.WARN]: { badge: "⚠", color: "yellow", label: "warn" },
+        [LogLevel.ERROR]: { badge: "✖", color: "red", label: "error" },
+        [LogLevel.DEBUG]: { badge: "🐛", color: "magenta", label: "debug" },
+        [LogLevel.SUCCESS]: { badge: "✔", color: "green", label: "success" },
+        [LogLevel.LOG]: { badge: "📝", color: "white", label: "log" },
+        [LogLevel.PAUSE]: { badge: "⏸", color: "yellow", label: "pause" },
+        [LogLevel.START]: { badge: "▶", color: "green", label: "start" },
     },
 };
 

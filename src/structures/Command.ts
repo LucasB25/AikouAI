@@ -1,5 +1,5 @@
-import type { Bot } from './index.js';
-import type { ApplicationCommandOption, PermissionResolvable } from 'discord.js';
+import type { ApplicationCommandOption, PermissionResolvable } from "discord.js";
+import type { Bot } from "./index.js";
 
 interface CommandDescription {
     content: string;
@@ -26,14 +26,14 @@ interface CommandOptions {
 }
 
 const defaultDescription: CommandDescription = {
-    content: 'No description provided',
-    usage: 'No usage provided',
-    examples: ['No examples provided'],
+    content: "No description provided",
+    usage: "No usage provided",
+    examples: ["No examples provided"],
 };
 
 const defaultPermissions: CommandPermissions = {
     dev: false,
-    client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
+    client: ["SendMessages", "ViewChannel", "EmbedLinks"],
     user: [],
 };
 
@@ -57,7 +57,7 @@ export default class Command {
         this.cooldown = options.cooldown || 3;
         this.permissions = { ...defaultPermissions, ...options.permissions };
         this.options = options.options || [];
-        this.category = options.category || 'general';
+        this.category = options.category || "general";
     }
 
     public async run(_client: Bot, _message: any, _args: string[]): Promise<any> {

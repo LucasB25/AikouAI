@@ -1,7 +1,7 @@
-import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
-import { ChannelType, type Message, TextChannel, ThreadAutoArchiveDuration } from 'discord.js';
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+import { ChannelType, type Message, TextChannel, ThreadAutoArchiveDuration } from "discord.js";
 
-import { type Bot, Event } from '../../structures/index.js';
+import { type Bot, Event } from "../../structures/index.js";
 
 function truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? `${text.substring(0, maxLength - 3)}...` : text;
@@ -9,13 +9,13 @@ function truncateText(text: string, maxLength: number): string {
 
 function removeBotMention(text: string, botId: string): string {
     const mention = `<@${botId}>`;
-    return text.replace(mention, '').trim();
+    return text.replace(mention, "").trim();
 }
 
 export default class MessageCreate extends Event {
     constructor(client: Bot, file: string) {
         super(client, file, {
-            name: 'messageCreate',
+            name: "messageCreate",
         });
     }
 
@@ -68,12 +68,12 @@ export default class MessageCreate extends Event {
                     thread.sendTyping();
 
                     const chat = model.startChat({
-                        history: [{ role: 'user', parts: [{ text: message.content }] }],
+                        history: [{ role: "user", parts: [{ text: message.content }] }],
                     });
 
                     const generatedText = (await chat.sendMessage(message.content)).response.text();
 
-                    let lastIndex = generatedText.lastIndexOf('\n', 1900);
+                    let lastIndex = generatedText.lastIndexOf("\n", 1900);
                     if (lastIndex === -1 || lastIndex >= 1900) lastIndex = 1900;
 
                     const substring = generatedText.substring(0, lastIndex).trim();
@@ -88,7 +88,7 @@ export default class MessageCreate extends Event {
                 }
             }
         } else if (botMentioned) {
-            message.reply('To ask a question, please end your message with punctuation (. ! ?).');
+            message.reply("To ask a question, please end your message with punctuation (. ! ?).");
         }
     }
 }

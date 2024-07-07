@@ -1,7 +1,7 @@
-import { createCanvas, loadImage } from '@napi-rs/canvas';
-import fs from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import { request } from 'undici';
+import fs from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { createCanvas, loadImage } from "@napi-rs/canvas";
+import { request } from "undici";
 
 interface MergeImagesOptions {
     width: number;
@@ -17,7 +17,7 @@ export class Canvas {
             const { width, height, images } = options;
 
             if (width <= 0 || height <= 0 || !Array.isArray(images) || images.length === 0) {
-                throw new Error('Invalid parameters for mergeImages');
+                throw new Error("Invalid parameters for mergeImages");
             }
 
             const imageCount = images.length;
@@ -26,7 +26,7 @@ export class Canvas {
             const chunkWidth = Math.floor(width / cols);
             const chunkHeight = Math.floor(height / rows);
             const canvas = createCanvas(width, height);
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext("2d");
 
             tempDirPath = await fs.mkdtemp(`${tmpdir()}/temp`);
 
@@ -53,7 +53,7 @@ export class Canvas {
 
             await Promise.allSettled(promises);
 
-            return canvas.toBuffer('image/png');
+            return canvas.toBuffer("image/png");
         } catch (error) {
             throw new Error(`Error merging images: ${(error as Error).message}`);
         } finally {
