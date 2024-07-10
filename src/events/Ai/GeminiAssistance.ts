@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { ChannelType, type Message, TextChannel, ThreadAutoArchiveDuration } from "discord.js";
-
 import { type Bot, Event } from "../../structures/index.js";
 
 function truncateText(text: string, maxLength: number): string {

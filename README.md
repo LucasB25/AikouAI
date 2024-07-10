@@ -68,7 +68,7 @@ or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/Aik
 ```bash
 TOKEN= #Discord Bot Token
 CLIENT_ID= #Discord Bot Client ID
-Activity=/help
+ACTIVITY=/help
 
 #For REPLICATE
 REPLICATE_TOKEN= #Replicate Token from https://replicate.com/signin
@@ -76,7 +76,7 @@ REPLICATE_MODEL=bytedance/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ff
 
 #For GEMINI
 GEMINI_KEY= #GEMINI key from https://makersuite.google.com/
-GEMINI_MODEL=gemini-1.5-pro-latest # Or gemini-1.5-flash-latest
+GEMINI_MODEL=gemini-1.5-flash-latest
 ```
 
 5. Run the bot:

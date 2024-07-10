@@ -17,7 +17,11 @@ export default class Event {
         this.file = file;
         this.name = name;
         this.one = one;
-        this.fileName = file.split(".")[0];
+        this.fileName = this.extractFileName(file);
+    }
+
+    private extractFileName(file: string): string {
+        return file.split(".")[0];
     }
 
     public async run(..._args: unknown[]): Promise<void> {

@@ -1,5 +1,4 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-
 import { type Bot, Command, type Context } from "../../structures/index.js";
 
 export default class Imagine extends Command {
@@ -129,8 +128,7 @@ export default class Imagine extends Command {
 
     async run(client: Bot, ctx: Context, args: string[]): Promise<void> {
         const prompt = args[0];
-        const numOutputsString = args[1];
-        const numOutputs = parseInt(numOutputsString || "4", 10);
+        const numOutputs = parseInt(args[1] || "4", 10);
         const negativePrompt = args[2];
 
         if (!prompt) {
@@ -141,28 +139,33 @@ export default class Imagine extends Command {
         await ctx.sendDeferMessage("Generating...");
         await ctx.editMessage({ content: `**${prompt}** - ${client.user.toString()}` });
 
-        const prediction = (await client.replicate.run(client.config.replicateModel, {
-            input: { prompt, num_outputs: numOutputs, negative_prompt: negativePrompt },
-        })) as string[];
+        try {
+            const prediction = (await client.replicate.run(client.config.replicateModel, {
+                input: { prompt, num_outputs: numOutputs, negative_prompt: negativePrompt },
+            })) as string[];
 
-        const rowImg = await client.canvas.mergeImages({
-            width: 1000,
-            height: 1000,
-            images: prediction,
-        });
+            const rowImg = await client.canvas.mergeImages({
+                width: 1000,
+                height: 1000,
+                images: prediction,
+            });
 
-        const attachment = new AttachmentBuilder(rowImg).setName("imagine.png");
+            const attachment = new AttachmentBuilder(rowImg).setName("imagine.png");
 
-        const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
-            ...prediction.map((url, i) =>
-                new ButtonBuilder()
-                    .setLabel(`${i + 1}`)
-                    .setStyle(ButtonStyle.Link)
-                    .setURL(url),
-            ),
-            new ButtonBuilder().setLabel("Support").setStyle(ButtonStyle.Link).setURL("https://discord.gg/JeaQTqzsJw"),
-        );
+            const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
+                ...prediction.map((url, i) =>
+                    new ButtonBuilder()
+                        .setLabel(`${i + 1}`)
+                        .setStyle(ButtonStyle.Link)
+                        .setURL(url),
+                ),
+                new ButtonBuilder().setLabel("Support").setStyle(ButtonStyle.Link).setURL("https://discord.gg/JeaQTqzsJw"),
+            );
 
-        await ctx.editMessage({ files: [attachment], components: [buttonRow] });
+            await ctx.editMessage({ files: [attachment], components: [buttonRow] });
+        } catch (error) {
+            console.error("Generation Error:", error);
+            await ctx.editMessage({ content: `An error occurred during generation: ${error.message}` });
+        }
     }
 }

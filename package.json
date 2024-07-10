@@ -1,6 +1,6 @@
 {
     "name": "AikouAI",
-    "version": "1.11.2",
+    "version": "1.12.3",
     "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",
@@ -22,7 +22,7 @@
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
         "@biomejs/biome": "^1.8.3",
-        "@types/node": "^20.14.9",
+        "@types/node": "^20.14.10",
         "@types/signale": "^1.4.7",
         "ts-node": "^10.9.2",
         "typescript": "^5.5.3"

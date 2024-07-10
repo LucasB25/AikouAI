@@ -4,7 +4,7 @@ export default {
     token: process.env.TOKEN,
     clientId: process.env.CLIENT_ID,
     color: 0x2f3136,
-    activity: process.env.Activity,
+    activity: process.env.ACTIVITY,
 
     replicateToken: process.env.REPLICATE_TOKEN,
     replicateModel: process.env.REPLICATE_MODEL as any,

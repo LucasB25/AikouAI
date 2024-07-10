@@ -51,7 +51,7 @@ export class Canvas {
                 }
             });
 
-            await Promise.allSettled(promises);
+            await Promise.all(promises);
 
             return canvas.toBuffer("image/png");
         } catch (error) {

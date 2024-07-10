@@ -73,7 +73,7 @@ export default class Calculate extends Command {
         });
     }
 
-    async run(client: Bot, ctx: Context, args: string[]): Promise<void> {
+    async run(_client: Bot, ctx: Context, args: string[]): Promise<void> {
         const expression = args.join(" ");
 
         if (!expression) {
@@ -90,7 +90,7 @@ export default class Calculate extends Command {
                 throw new Error("Invalid mathematical result.");
             }
 
-            const embed = client
+            const embed = this.client
                 .embed()
                 .setTitle("Calculation Result")
                 .addFields(
@@ -143,6 +143,10 @@ export default class Calculate extends Command {
                 ],
             })
             .sendMessage(expression);
+
+        if (!response.response) {
+            throw new Error("Calculate AI did not return a response.");
+        }
 
         return response.response.text().trim();
     }

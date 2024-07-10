@@ -63,13 +63,15 @@ export default class Bot extends Client {
     }
 
     public embed(): EmbedBuilder {
-        return new EmbedBuilder().setColor(this.config.color as any);
+        return new EmbedBuilder().setColor(this.config.color);
     }
 
     private async loadEvents(): Promise<void> {
-        const events = fs.readdirSync(path.join(__dirname, "../events"));
+        const eventsPath = path.join(__dirname, "../events");
+        const events = fs.readdirSync(eventsPath);
         for (const event of events) {
-            const eventFiles = fs.readdirSync(path.join(__dirname, `../events/${event}`)).filter((file) => file.endsWith(".js"));
+            const eventFilesPath = path.join(eventsPath, event);
+            const eventFiles = fs.readdirSync(eventFilesPath).filter((file) => file.endsWith(".js"));
             for (const file of eventFiles) {
                 const eventFile = (await import(`../events/${event}/${file}`)).default;
                 const eventClass = new eventFile(this, file);
@@ -79,20 +81,22 @@ export default class Bot extends Client {
     }
 
     private async loadCommands(): Promise<void> {
-        const commandsPath = fs.readdirSync(path.join(__dirname, "../commands"));
-        for (const commandPath of commandsPath) {
-            const commandFiles = fs.readdirSync(path.join(__dirname, `../commands/${commandPath}`)).filter((file) => file.endsWith(".js"));
+        const commandsPath = path.join(__dirname, "../commands");
+        const commandCategories = fs.readdirSync(commandsPath);
+        for (const category of commandCategories) {
+            const commandFilesPath = path.join(commandsPath, category);
+            const commandFiles = fs.readdirSync(commandFilesPath).filter((file) => file.endsWith(".js"));
             for (const file of commandFiles) {
-                const commandFile = (await import(`../commands/${commandPath}/${file}`)).default;
+                const commandFile = (await import(`../commands/${category}/${file}`)).default;
                 const command = new commandFile(this, file);
                 this.commands.set(command.name, command);
                 const data: RESTPostAPIChatInputApplicationCommandsJSONBody = {
                     name: command.name,
                     description: command.description.content,
                     type: ApplicationCommandType.ChatInput,
-                    options: command.options || null,
-                    name_localizations: command.nameLocalizations || null,
-                    description_localizations: command.descriptionLocalizations || null,
+                    options: command.options || [],
+                    name_localizations: command.nameLocalizations || {},
+                    description_localizations: command.descriptionLocalizations || {},
                     default_member_permissions: command.permissions.user.length > 0 ? command.permissions.user : null,
                 };
                 if (command.permissions.user.length > 0) {

@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-
 import { type Bot, Command, type Context } from "../../structures/index.js";
 
 export default class Translate extends Command {
@@ -163,7 +162,6 @@ export default class Translate extends Command {
             .sendMessage(text);
 
         const translatedText = response.response.text();
-
         const sourceLanguageName = await this.detectLanguageName(text);
 
         return { translatedText, sourceLanguageName };

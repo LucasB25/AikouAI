@@ -1,5 +1,4 @@
 import type { CommandInteraction } from "discord.js";
-
 import { type Bot, Context, Event } from "../../structures/index.js";
 
 export default class InteractionCreate extends Event {

@@ -1,5 +1,4 @@
 import { type ClientOptions, Partials } from "discord.js";
-
 import config from "./config.js";
 import Bot from "./structures/Client.js";
 

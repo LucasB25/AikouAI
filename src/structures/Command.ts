@@ -54,7 +54,7 @@ export default class Command {
         this.nameLocalizations = options.nameLocalizations || {};
         this.description = options.description || defaultDescription;
         this.descriptionLocalizations = options.descriptionLocalizations || null;
-        this.cooldown = options.cooldown || 3;
+        this.cooldown = options.cooldown ?? 3;
         this.permissions = { ...defaultPermissions, ...options.permissions };
         this.options = options.options || [];
         this.category = options.category || "general";

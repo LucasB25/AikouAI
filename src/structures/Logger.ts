@@ -45,8 +45,7 @@ export default class Logger extends Signale {
 
     private static mergeOptions(options: LoggerOptions): LoggerOptions {
         const { types: userTypes, ...rest } = options;
-        const mergedTypes = { ...defaultOptions.types, ...userTypes };
-        return { ...defaultOptions, ...rest, types: mergedTypes };
+        return { ...defaultOptions, ...rest, types: { ...defaultOptions.types, ...userTypes } };
     }
 
     private validateOptions(options: LoggerOptions): void {
