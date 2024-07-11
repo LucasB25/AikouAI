@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
+
 import { type Bot, Command, type Context } from "../../structures/index.js";
 
 export default class DictionaryCommand extends Command {

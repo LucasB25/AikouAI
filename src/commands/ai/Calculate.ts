@@ -136,13 +136,13 @@ export default class Calculate extends Command {
                         role: "user",
                         parts: [
                             {
-                                text: `Solve the following mathematical expression: ${expression}. Provide only the result. If you determine that the requested mathematical expression has no relevance to mathematics, indicate that the posed expression is incorrect.`,
+                                text: `Solve the following mathematical expression: ${expression}. Provide only the result. Ensure that the result is mathematically accurate and that it solves the given equation.`,
                             },
                         ],
                     },
                 ],
             })
-            .sendMessage(expression);
+            .sendMessage("");
 
         if (!response.response) {
             throw new Error("Calculate AI did not return a response.");
@@ -152,6 +152,6 @@ export default class Calculate extends Command {
     }
 
     private isValidMathResult(result: string): boolean {
-        return /^[0-9+\-*/^().= ]+$/.test(result);
+        return /^[0-9a-zA-Z+\-*/^().= ]+$/.test(result);
     }
 }

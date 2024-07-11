@@ -114,9 +114,9 @@ export default class ConvertCommand extends Command {
             model: this.client.config.geminiModel,
             generationConfig: {
                 maxOutputTokens: 100,
-                temperature: 0.9,
+                temperature: 0.7,
                 topK: 1,
-                topP: 1,
+                topP: 0.95,
             },
             safety_settings: [
                 { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
@@ -131,11 +131,15 @@ export default class ConvertCommand extends Command {
                 history: [
                     {
                         role: "user",
-                        parts: [{ text: `Convert the following: ${query}. Provide only the result.` }],
+                        parts: [
+                            {
+                                text: `Please convert the following query accurately and provide only the result without any additional text: ${query}`,
+                            },
+                        ],
                     },
                 ],
             })
-            .sendMessage(query);
+            .sendMessage("");
 
         if (!response.response) {
             throw new Error("Conversion AI did not return a response.");
@@ -145,6 +149,6 @@ export default class ConvertCommand extends Command {
     }
 
     private isValidConversionResult(result: string): boolean {
-        return /\d/.test(result);
+        return /\d/.test(result) && result.length < 100;
     }
 }
