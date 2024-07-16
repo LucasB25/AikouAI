@@ -12,11 +12,14 @@ export default class InteractionCreate extends Event {
         try {
             if (interaction.isCommand()) {
                 const commandName = interaction.commandName;
+                await this.client.db.get(interaction.guildId);
+                const locale = await this.client.db.getLanguage(interaction.guildId);
                 const command = this.client.commands.get(commandName);
                 if (!command) return;
 
                 const ctx = new Context(interaction, interaction.options.data);
                 ctx.setArgs(interaction.options.data);
+                ctx.guildLocale = locale;
                 await command.run(this.client, ctx, ctx.args);
             }
         } catch (error) {

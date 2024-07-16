@@ -1,4 +1,4 @@
-import type { ApplicationCommandOption, PermissionResolvable } from "discord.js";
+import type { APIApplicationCommandOption, PermissionResolvable } from "discord.js";
 import type { Bot } from "./index.js";
 
 interface CommandDescription {
@@ -15,47 +15,43 @@ interface CommandPermissions {
 
 interface CommandOptions {
     name: string;
-    nameLocalizations?: Record<string, string>;
+    name_localizations?: Record<string, string>;
     description?: CommandDescription;
-    descriptionLocalizations?: Record<string, string>;
+    description_localizations?: Record<string, string>;
     aliases?: string[];
     cooldown?: number;
     permissions?: CommandPermissions;
-    options?: ApplicationCommandOption[];
+    options?: APIApplicationCommandOption[];
     category?: string;
 }
-
-const defaultDescription: CommandDescription = {
-    content: "No description provided",
-    usage: "No usage provided",
-    examples: ["No examples provided"],
-};
-
-const defaultPermissions: CommandPermissions = {
-    dev: false,
-    client: ["SendMessages", "ViewChannel", "EmbedLinks"],
-    user: [],
-};
 
 export default class Command {
     public client: Bot;
     public name: string;
-    public nameLocalizations: Record<string, string>;
+    public name_localizations: Record<string, string>;
     public description: CommandDescription;
-    public descriptionLocalizations: Record<string, string> | null;
+    public description_localizations: Record<string, string> | null;
     public cooldown: number;
     public permissions: CommandPermissions;
-    public options: ApplicationCommandOption[];
+    public options: APIApplicationCommandOption[];
     public category: string;
 
     constructor(client: Bot, options: CommandOptions) {
         this.client = client;
         this.name = options.name;
-        this.nameLocalizations = options.nameLocalizations || {};
-        this.description = options.description || defaultDescription;
-        this.descriptionLocalizations = options.descriptionLocalizations || null;
+        this.name_localizations = options.name_localizations || {};
+        this.description = {
+            content: options.description?.content ?? "No description provided",
+            usage: options.description?.usage ?? "No usage provided",
+            examples: options.description?.examples ?? ["No examples provided"],
+        };
+        this.description_localizations = options.description_localizations || {};
         this.cooldown = options.cooldown ?? 3;
-        this.permissions = { ...defaultPermissions, ...options.permissions };
+        this.permissions = {
+            dev: options.permissions?.dev ?? false,
+            client: options.permissions?.client ?? ["SendMessages", "ViewChannel", "EmbedLinks"],
+            user: options.permissions?.user ?? [],
+        };
         this.options = options.options || [];
         this.category = options.category || "general";
     }

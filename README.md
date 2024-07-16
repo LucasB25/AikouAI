@@ -69,6 +69,7 @@ or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/Aik
 TOKEN= #Discord Bot Token
 CLIENT_ID= #Discord Bot Client ID
 ACTIVITY=/help
+DATABASE_URL= "" # Your database url (if sqlite then you can leave it blank)
 
 #For REPLICATE
 REPLICATE_TOKEN= #Replicate Token from https://replicate.com/signin
@@ -79,7 +80,19 @@ GEMINI_KEY= #GEMINI key from https://makersuite.google.com/
 GEMINI_MODEL=gemini-1.5-flash-latest
 ```
 
-5. Run the bot:
+5. generate the prisma client
+
+```bash
+npm run prisma:push
+```
+
+Run the migrations (Only if you want to migrate your database)
+
+```bash
+npm run prisma:migrate
+```
+
+6. Run the bot:
 
 ```bash
 npm start

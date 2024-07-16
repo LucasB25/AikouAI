@@ -7,33 +7,13 @@ export default class Calculate extends Command {
     constructor(client: Bot) {
         super(client, {
             name: "calculate",
-            nameLocalizations: {
-                fr: "calculer",
-                "es-ES": "calcular",
-                de: "berechnen",
-                it: "calcolare",
-                ja: "計算",
-                ko: "계산",
-                "zh-CN": "计算",
-                ru: "посчитать",
-            },
             description: {
-                content: "Solves a mathematical expression",
+                content: "cmd.calculate.description",
                 usage: "calculate <expression>",
                 examples: [
                     "calculate sum of first 100 terms of arithmetic series with first term 1 and common difference 3",
                     "calculate solve for x: x^2 - 5x + 6 = 0",
                 ],
-            },
-            descriptionLocalizations: {
-                fr: "Résout une expression mathématique",
-                "es-ES": "Resuelve una expresión matemática",
-                de: "Löst einen mathematischen Ausdruck",
-                it: "Risolve un'espressione matematica",
-                ja: "数式を解きます",
-                ko: "수학식을 해결합니다",
-                "zh-CN": "解决数学表达式",
-                ru: "Решает математическое выражение",
             },
             category: "ai",
             cooldown: 3,
@@ -45,27 +25,7 @@ export default class Calculate extends Command {
             options: [
                 {
                     name: "expression",
-                    nameLocalizations: {
-                        fr: "expression",
-                        "es-ES": "expresión",
-                        de: "ausdruck",
-                        it: "espressione",
-                        ja: "数式",
-                        ko: "수식",
-                        "zh-CN": "表达式",
-                        ru: "выражение",
-                    },
-                    description: "The mathematical expression to solve",
-                    descriptionLocalizations: {
-                        fr: "L'expression mathématique à résoudre",
-                        "es-ES": "La expresión matemática a resolver",
-                        de: "Der mathematische Ausdruck, der gelöst werden soll",
-                        it: "L'espressione matematica da risolvere",
-                        ja: "解く数式",
-                        ko: "해결할 수학식",
-                        "zh-CN": "要解决的数学表达式",
-                        ru: "Математическое выражение для решения",
-                    },
+                    description: "cmd.calculate.options.command",
                     type: 3,
                     required: true,
                 },

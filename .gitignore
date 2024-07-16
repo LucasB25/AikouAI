@@ -6,4 +6,6 @@
 .eslintcache
 .env
 package-lock.json
-yarn.lock
+yarn.lock.
+/prisma/aikouticket.db
+/prisma/migrations

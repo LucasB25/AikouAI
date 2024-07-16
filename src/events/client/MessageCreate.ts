@@ -8,8 +8,8 @@ export default class MessageCreate extends Event {
         });
     }
 
-    // biome-ignore lint/suspicious/useAwait: <explanation>
     public async run(message: Message): Promise<void> {
+        await this.client.db.get(message.guildId);
         if (message.channel instanceof TextChannel) {
             // Add your logic here if needed
         }

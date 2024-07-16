@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { initI18n, T, i18n, localization } from "./I18n.js";
 import { fileURLToPath } from "node:url";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
@@ -11,10 +12,12 @@ import {
     REST,
     type RESTPostAPIChatInputApplicationCommandsJSONBody,
     Routes,
+    Locale,
 } from "discord.js";
 import Replicate from "replicate";
 
 import config from "../config.js";
+import ServerData from "../database/server.js";
 import { Canvas } from "./Canvas.js";
 import Logger from "./Logger.js";
 
@@ -23,6 +26,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default class Bot extends Client {
     public config = config;
     public logger = new Logger();
+    public db = new ServerData();
     public readonly color = config.color;
     public commands = new Collection<string, any>();
     private data: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
@@ -33,9 +37,11 @@ export default class Bot extends Client {
     public async start(token: string): Promise<void> {
         try {
             this.logger.start("Starting bot...");
+            initI18n();
             this.initReplicate();
             this.initGoogleGenerativeAI();
 
+            // await this.deleteCommands();
             await this.loadCommands();
             await this.loadEvents();
             await this.login(token);
@@ -90,18 +96,48 @@ export default class Bot extends Client {
                 const commandFile = (await import(`../commands/${category}/${file}`)).default;
                 const command = new commandFile(this, file);
                 this.commands.set(command.name, command);
+
                 const data: RESTPostAPIChatInputApplicationCommandsJSONBody = {
                     name: command.name,
-                    description: command.description.content,
+                    description: T(Locale.EnglishUS, command.description.content),
                     type: ApplicationCommandType.ChatInput,
                     options: command.options || [],
-                    name_localizations: command.nameLocalizations || {},
-                    description_localizations: command.descriptionLocalizations || {},
-                    default_member_permissions: command.permissions.user.length > 0 ? command.permissions.user : null,
+                    default_member_permissions:
+                        Array.isArray(command.permissions.user) && command.permissions.user.length > 0
+                            ? PermissionsBitField.resolve(command.permissions.user as any).toString()
+                            : null,
+                    name_localizations: null,
+                    description_localizations: null,
                 };
-                if (command.permissions.user.length > 0) {
-                    const permissionValue = PermissionsBitField.resolve(command.permissions.user);
-                    data.default_member_permissions = typeof permissionValue === "bigint" ? permissionValue.toString() : permissionValue;
+                // command description and name localizations
+                const localizations = [];
+                i18n.getLocales().map((locale) => {
+                    localizations.push(localization(locale, command.name, command.description.content));
+                });
+                for (const localization of localizations) {
+                    const [language, name] = localization.name;
+                    const [language2, description] = localization.description;
+                    data.name_localizations = { ...data.name_localizations, [language]: name };
+                    data.description_localizations = { ...data.description_localizations, [language2]: description };
+                }
+
+                // command options localizations
+                if (command.options.length > 0) {
+                    command.options.map((option) => {
+                        // command options name and description localizations
+                        const optionsLocalizations = [];
+                        i18n.getLocales().map((locale) => {
+                            optionsLocalizations.push(localization(locale, option.name, option.description));
+                        });
+                        for (const localization of optionsLocalizations) {
+                            const [language, name] = localization.name;
+                            const [language2, description] = localization.description;
+                            option.name_localizations = { ...option.name_localizations, [language]: name };
+                            option.description_localizations = { ...option.description_localizations, [language2]: description };
+                        }
+                        // command options description localization
+                        option.description = T(Locale.EnglishUS, option.description);
+                    });
                 }
                 this.data.push(data);
             }
@@ -117,5 +153,21 @@ export default class Bot extends Client {
                 this.logger.error(error);
             }
         });
+    }
+
+    // New method to delete existing slash commands
+    private async deleteCommands(): Promise<void> {
+        const rest = new REST({ version: "10" }).setToken(this.config.token ?? "");
+        const applicationCommands = Routes.applicationCommands(this.config.clientId ?? "");
+        try {
+            const existingCommands = (await rest.get(applicationCommands)) as any[];
+            for (const command of existingCommands) {
+                await rest.delete(Routes.applicationCommand(this.config.clientId ?? "", command.id));
+                this.logger.info(`Deleted command: ${command.name}`);
+            }
+            this.logger.info("Successfully deleted all existing slash commands.");
+        } catch (error) {
+            this.logger.error("Failed to delete slash commands:", error);
+        }
     }
 }
