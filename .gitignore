@@ -9,3 +9,4 @@ package-lock.json
 yarn.lock.
 /prisma/aikouticket.db
 /prisma/migrations
+/languages
