@@ -8,6 +8,9 @@ export default {
     activity: process.env.ACTIVITY,
     defaultLanguage: process.env.DEFAULT_LANGUAGE || Language.EnglishUS,
 
+    allowedForumChannels: process.env.FORUM_CHANNELS ? JSON.parse(process.env.FORUM_CHANNELS) : [],
+    tagNames: process.env.TAGS_NAMES ? JSON.parse(process.env.TAGS_NAMES) : [],
+
     replicateToken: process.env.REPLICATE_TOKEN,
     replicateModel: process.env.REPLICATE_MODEL as any,
 

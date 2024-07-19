@@ -10,8 +10,11 @@ export default class ThreadCreate extends Event {
 
     public async run(thread: ThreadChannel): Promise<void> {
         if (!(thread.parent instanceof ForumChannel)) return;
+
+        if (!this.client.config.allowedForumChannels.includes(thread.parent.id)) return;
+
         try {
-            const tagNames = ["open", "close"];
+            const tagNames = this.client.config.tagNames;
 
             const availableTags = thread.parent.availableTags;
 
@@ -22,10 +25,8 @@ export default class ThreadCreate extends Event {
             const combinedTagIds = Array.from(new Set([...currentTagIds, ...newTagIds]));
 
             await thread.setAppliedTags(combinedTagIds);
-
-            console.log(`Tags added to the thread: ${thread.name}`);
-        } catch (error) {
-            console.error(`Error while adding tags to the thread: ${thread.name}`, error);
+        } catch (_error) {
+            throw new Error(`Error while adding tags to the thread: ${thread.name}`);
         }
     }
 }

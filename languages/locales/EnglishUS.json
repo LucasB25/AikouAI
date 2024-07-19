@@ -56,5 +56,6 @@
 	},
 	"words": {
 		"here": "Here"
-	}
+	},
+	"Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread.": "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread."
 }

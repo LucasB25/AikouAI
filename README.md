@@ -69,7 +69,11 @@ or you can use the [.env.example](https://raw.githubusercontent.com/LucasB25/Aik
 TOKEN= #Discord Bot Token
 CLIENT_ID= #Discord Bot Client ID
 ACTIVITY=/help
-DATABASE_URL= "" # Your database url (if sqlite then you can leave it blank)
+DATABASE_URL= "" #Your database url (if sqlite then you can leave it blank)
+
+#ForumChannels
+FORUM_CHANNELS= ["",""] #Forum Channels: An array of forum channel IDs where the bot will operate. Add your forum channel IDs here.
+TAGS_NAMES= ["",""] #Tags Names: An array of tag names that will be applied to threads created in the specified forum channels.
 
 #For REPLICATE
 REPLICATE_TOKEN= #Replicate Token from https://replicate.com/signin
