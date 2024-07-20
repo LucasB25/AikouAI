@@ -1,0 +1,49 @@
+{
+	"cmd": {
+		"calculate": {
+			"description": "cmd.calculate.description",
+			"options": {
+				"command": "cmd.calculate.options.command"
+			}
+		},
+		"convert": {
+			"description": "cmd.convert.description",
+			"options": {
+				"command": "cmd.convert.options.command"
+			}
+		},
+		"dictionary": {
+			"description": "cmd.dictionary.description"
+		},
+		"imagine": {
+			"description": "cmd.imagine.description"
+		},
+		"translate": {
+			"description": "cmd.translate.description"
+		},
+		"about": {
+			"description": "cmd.about.description"
+		},
+		"help": {
+			"description": "cmd.help.description"
+		},
+		"invite": {
+			"description": "cmd.invite.description"
+		},
+		"ping": {
+			"description": "cmd.ping.description"
+		}
+	},
+	"The word to define": "The word to define",
+	"The language for the definition": "The language for the definition",
+	"The prompt to use": "The prompt to use",
+	"The number of outputs to generate": "The number of outputs to generate",
+	"The negative prompt to use": "The negative prompt to use",
+	"The text to translate": "The text to translate",
+	"The target language code (e": {
+		"g": {
+			", \"es\" for Spanish)": "The target language code (e.g., \"es\" for Spanish)"
+		}
+	},
+	"Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread.": "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread."
+}
