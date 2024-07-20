@@ -25,7 +25,7 @@ export default class Calculate extends Command {
             options: [
                 {
                     name: "expression",
-                    description: "cmd.calculate.options.command",
+                    description: "cmd.calculate.options.expression",
                     type: 3,
                     required: true,
                 },

@@ -22,13 +22,13 @@ export default class DictionaryCommand extends Command {
             options: [
                 {
                     name: "word",
-                    description: "The word to define",
+                    description: "cmd.dictionary.options.word",
                     type: 3,
                     required: true,
                 },
                 {
                     name: "language",
-                    description: "The language for the definition",
+                    description: "cmd.dictionary.options.language",
                     type: 3,
                     required: false,
                 },

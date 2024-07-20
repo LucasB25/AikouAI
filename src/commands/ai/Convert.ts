@@ -22,7 +22,7 @@ export default class ConvertCommand extends Command {
             options: [
                 {
                     name: "conversion",
-                    description: "cmd.convert.options.command",
+                    description: "cmd.convert.options.conversion",
                     type: 3,
                     required: true,
                 },

@@ -21,13 +21,13 @@ export default class Translate extends Command {
             options: [
                 {
                     name: "text",
-                    description: "The text to translate",
+                    description: "cmd.translate.options.text",
                     type: 3,
                     required: true,
                 },
                 {
                     name: "target-language",
-                    description: 'The target language code (e.g., "es" for Spanish)',
+                    description: "cmd.translate.options.targetlanguage",
                     type: 3,
                     required: true,
                 },

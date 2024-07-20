@@ -1,49 +1,67 @@
 {
 	"cmd": {
+		"ping": {
+			"description": "Get the bot latency"
+		},
+		"about": {
+			"description": "Shows information about the bot",
+			"creator": "Creator",
+			"repository": "Repository",
+			"support": "Support",
+			"invite": "Invite {client}"
+		},
+		"help": {
+			"description": "Lists all available commands",
+			"title": "Help - List of Commands"
+		},
+		"invite": {
+			"description": "Get the bot invite link",
+			"content": "Invite me to your server with this link: [Invite](https://discord.com/oauth2/authorize?client_id={client}&scope=bot%20applications.commands&permissions=8)"
+		},
 		"calculate": {
-			"description": "cmd.calculate.description",
+			"description": "Solves a mathematical expression",
 			"options": {
-				"command": "cmd.calculate.options.command"
+				"expression": "The mathematical expression to solve"
 			}
 		},
 		"convert": {
-			"description": "cmd.convert.description",
+			"description": "Converts units of measurement or currencies",
 			"options": {
-				"command": "cmd.convert.options.command"
+				"conversion": "The conversion query"
 			}
 		},
 		"dictionary": {
-			"description": "cmd.dictionary.description"
+			"description": "Provides definitions for a given word in a specified language",
+			"options": {
+				"word": "The word to define",
+				"language": "The language for the definition"
+			}
 		},
 		"imagine": {
-			"description": "cmd.imagine.description"
+			"description": "Creates an image from a prompt",
+			"generating": "Generating...",
+			"prompt": "Please provide a prompt.",
+			"options": {
+				"prompt": "The prompt to use",
+				"numoutputs": "The number of outputs to generate",
+				"negativeprompt": "The negative prompt to use"
+			}
 		},
 		"translate": {
-			"description": "cmd.translate.description"
+			"description": "Translates text from one language to another",
+			"options": {
+				"text": "The text to translate",
+				"targetlanguage": "The target language code (e.g., 'es' for Spanish)"
+			}
 		},
-		"about": {
-			"description": "cmd.about.description"
-		},
-		"help": {
-			"description": "cmd.help.description"
-		},
-		"invite": {
-			"description": "cmd.invite.description"
-		},
-		"ping": {
-			"description": "cmd.ping.description"
+		"closethread": {
+			"description": "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread."
 		}
 	},
-	"The word to define": "The word to define",
-	"The language for the definition": "The language for the definition",
-	"The prompt to use": "The prompt to use",
-	"The number of outputs to generate": "The number of outputs to generate",
-	"The negative prompt to use": "The negative prompt to use",
-	"The text to translate": "The text to translate",
-	"The target language code (e": {
-		"g": {
-			", \"es\" for Spanish)": "The target language code (e.g., \"es\" for Spanish)"
-		}
+	"buttons": {
+		"support": "Support Server"
 	},
-	"Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread.": "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread."
+	"words": {
+		"here": "Click Here"
+	}
 }

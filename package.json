@@ -5,12 +5,12 @@
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
-        "start": "npm run build && node dist/index.js",
+        "start": "npm run build && node .",
         "build": "tsc --project tsconfig.json",
         "clean:windows": "rmdir /s /q dist",
         "clean:linux": "rm -rf dist",
-        "lint": "biome lint --write ./src",
-        "format": "biome format --write ./src",
+        "lint": "biome lint --write src/",
+        "format": "biome format --write src/",
         "prisma:push": "npx prisma db push",
         "prisma:migrate": "npx prisma migrate dev --name init"
     },

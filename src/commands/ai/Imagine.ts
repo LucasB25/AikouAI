@@ -20,13 +20,13 @@ export default class Imagine extends Command {
             options: [
                 {
                     name: "prompt",
-                    description: "The prompt to use",
+                    description: "cmd.imagine.options.prompt",
                     type: 3,
                     required: true,
                 },
                 {
                     name: "num-outputs",
-                    description: "The number of outputs to generate",
+                    description: "cmd.imagine.options.numoutputs",
                     type: 3,
                     choices: [
                         { name: "1", value: "1" },
@@ -38,7 +38,7 @@ export default class Imagine extends Command {
                 },
                 {
                     name: "negative-prompt",
-                    description: "The negative prompt to use",
+                    description: "cmd.imagine.options.negativeprompt",
                     type: 3,
                     required: false,
                 },
@@ -52,11 +52,11 @@ export default class Imagine extends Command {
         const negativePrompt = args[2];
 
         if (!prompt) {
-            await ctx.sendMessage({ content: "Please provide a prompt." });
+            await ctx.sendMessage({ content: ctx.locale("cmd.imagine.prompt") });
             return;
         }
 
-        await ctx.sendDeferMessage("Generating...");
+        await ctx.sendDeferMessage(ctx.locale("cmd.imagine.generating"));
         await ctx.editMessage({ content: `**${prompt}** - ${client.user.toString()}` });
 
         try {
@@ -79,7 +79,10 @@ export default class Imagine extends Command {
                         .setStyle(ButtonStyle.Link)
                         .setURL(url),
                 ),
-                new ButtonBuilder().setLabel("Support").setStyle(ButtonStyle.Link).setURL("https://discord.gg/JeaQTqzsJw"),
+                new ButtonBuilder()
+                    .setLabel(ctx.locale("buttons.support"))
+                    .setStyle(ButtonStyle.Link)
+                    .setURL("https://discord.gg/JeaQTqzsJw"),
             );
 
             await ctx.editMessage({ files: [attachment], components: [buttonRow] });

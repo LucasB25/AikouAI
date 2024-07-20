@@ -1,15 +1,4 @@
 {
-	"The word to define": "Le mot à définir",
-	"The language for the definition": "La langue pour la définition",
-	"The prompt to use": "L'invite à utiliser",
-	"The number of outputs to generate": "Le nombre de sorties à générer",
-	"The negative prompt to use": "L'invite négative à utiliser",
-	"The text to translate": "Le texte à traduire",
-	"The target language code (e": {
-		"g": {
-			", \"es\" for Spanish)": "Le code de langue cible (ex. \"es\" pour l'espagnol)"
-		}
-	},
 	"cmd": {
 		"ping": {
 			"description": "Obtenir la latence du bot"
@@ -32,30 +21,47 @@
 		"calculate": {
 			"description": "Résout une expression mathématique",
 			"options": {
-				"command": "L'expression mathématique à résoudre"
+				"expression": "L'expression mathématique à résoudre"
 			}
 		},
 		"convert": {
 			"description": "Convertit des unités de mesure ou des devises",
 			"options": {
-				"command": "La requête de conversion"
+				"conversion": "La requête de conversion"
 			}
 		},
 		"dictionary": {
-			"description": "Fournit des définitions pour un mot donné dans une langue spécifiée"
+			"description": "Fournit des définitions pour un mot donné dans une langue spécifiée",
+			"options": {
+				"word": "Le mot à définir",
+				"language": "La langue pour la définition"
+			}
 		},
 		"imagine": {
-			"description": "Crée une image à partir d'une invite"
+			"description": "Crée une image à partir d'une invite",
+			"generating": "Génération...",
+			"prompt": "Veuillez fournir un prompt",
+			"options": {
+				"prompt": "L'invite à utiliser",
+				"numoutputs": "Le nombre de sorties à générer",
+				"negativeprompt": "L'invite négative à utiliser"
+			}
 		},
 		"translate": {
-			"description": "Traduit du texte d'une langue à une autre"
+			"description": "Traduit du texte d'une langue à une autre",
+			"options": {
+				"text": "Le texte à traduire",
+				"targetlanguage": "Le code de langue cible (ex. 'es' pour l'espagnol)"
+			}
+		},
+		"closethread": {
+			"description": "Ferme le fil actuel, supprime les tags, applique le tag 'résolu' et archive le fil."
 		}
 	},
 	"buttons": {
 		"support": "Serveur de Support"
 	},
 	"words": {
-		"here": "Ici"
-	},
-	"Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread.": "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread."
+		"here": "Clique Ici"
+	}
 }

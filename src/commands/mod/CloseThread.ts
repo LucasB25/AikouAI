@@ -6,7 +6,7 @@ export default class CloseThread extends Command {
         super(client, {
             name: "close-thread",
             description: {
-                content: "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread.",
+                content: "cmd.closethread.description",
                 usage: "close-thread",
                 examples: ["close-thread"],
             },
