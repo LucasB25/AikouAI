@@ -1,4 +1,4 @@
-[submodule "languages"]
+[submodule "language"]
 	path = AikouAI
 	url = https://github.com/LucasB25/AikouAI.git
-	branch = languages
+	branch = language
