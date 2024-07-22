@@ -55,7 +55,7 @@ export default class MessageCreate extends Event {
             const model = genAI.getGenerativeModel({
                 model: this.client.config.geminiModel,
                 generationConfig: {
-                    maxOutputTokens: 200,
+                    maxOutputTokens: 150,
                     temperature: 0.7,
                     topK: 1,
                     topP: 0.95,
