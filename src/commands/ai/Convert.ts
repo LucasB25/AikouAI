@@ -101,10 +101,6 @@ export default class ConvertCommand extends Command {
             })
             .sendMessage("");
 
-        if (!response.response) {
-            throw new Error("Conversion AI did not return a response.");
-        }
-
         return response.response.text().trim();
     }
 

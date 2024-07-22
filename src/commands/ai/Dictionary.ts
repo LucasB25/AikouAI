@@ -108,10 +108,6 @@ export default class DictionaryCommand extends Command {
             })
             .sendMessage(word);
 
-        if (!response.response) {
-            throw new Error("Dictionary AI did not return a response.");
-        }
-
         return response.response.text().trim();
     }
 }

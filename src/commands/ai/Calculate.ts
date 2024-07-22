@@ -104,10 +104,6 @@ export default class Calculate extends Command {
             })
             .sendMessage("");
 
-        if (!response.response) {
-            throw new Error("Calculate AI did not return a response.");
-        }
-
         return response.response.text().trim();
     }
 

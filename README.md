@@ -81,7 +81,7 @@ REPLICATE_MODEL=bytedance/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ff
 
 #For GEMINI
 GEMINI_KEY= #GEMINI key from https://makersuite.google.com/
-GEMINI_MODEL=gemini-1.5-flash-latest
+GEMINI_MODEL=gemini-1.5-flash
 ```
 
 5. generate the prisma client

@@ -140,10 +140,6 @@ export default class Translate extends Command {
             })
             .sendMessage(text);
 
-        if (!response.response) {
-            throw new Error("Language detection API did not return a response.");
-        }
-
         const detectedLanguageName = response.response.text().trim();
 
         if (!detectedLanguageName) {

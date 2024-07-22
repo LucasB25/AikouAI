@@ -1,6 +1,6 @@
 {
     "name": "AikouAI",
-    "version": "1.15.8",
+    "version": "1.17.8",
     "description": "A simple AikouAI bot for discord",
     "type": "module",
     "main": "dist/index.js",
@@ -24,12 +24,12 @@
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
         "@biomejs/biome": "^1.8.3",
+        "@types/i18n": "^0.13.12",
         "@types/node": "^20.14.11",
         "@types/signale": "^1.4.7",
+        "prisma": "^5.17.0",
         "ts-node": "^10.9.2",
-        "@types/i18n": "^0.13.12",
-        "typescript": "^5.5.3",
-        "prisma": "^5.17.0"
+        "typescript": "^5.5.3"
     },
     "keywords": [
         "discord",
@@ -53,14 +53,15 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.14.1",
+        "@google/generative-ai": "^0.15.0",
         "@napi-rs/canvas": "^0.1.53",
+        "@prisma/client": "^5.17.0",
+        "axios": "^1.7.2",
         "discord.js": "^14.15.3",
         "dotenv": "^16.4.5",
-        "replicate": "^0.31.1",
         "i18n": "^0.15.1",
+        "replicate": "^0.31.1",
         "signale": "^1.4.0",
-        "@prisma/client": "^5.17.0",
-        "undici": "^6.19.2"
+        "undici": "^6.19.4"
     }
 }
