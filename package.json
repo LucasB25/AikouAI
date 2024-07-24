@@ -53,7 +53,7 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.15.0",
+        "@google/generative-ai": "^0.16.0",
         "@napi-rs/canvas": "^0.1.53",
         "@prisma/client": "^5.17.0",
         "axios": "^1.7.2",
