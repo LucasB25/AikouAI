@@ -25,29 +25,27 @@ export default class CloseThread extends Command {
         const thread = ctx.channel as ThreadChannel;
 
         if (!(thread.parent instanceof ForumChannel)) {
-            await ctx.sendMessage({ content: "This command can only be used in a thread within a forum channel." });
+            await ctx.sendMessage({ content: ctx.locale("cmd.closethread.forumchannel") });
             return;
         }
 
         if (!this.client.config.allowedForumChannels.includes(thread.parent.id)) {
-            await ctx.sendMessage({ content: "This command cannot be used in this forum channel." });
+            await ctx.sendMessage({ content: ctx.locale("cmd.closethread.allowedforumchannels") });
             return;
         }
 
         try {
-            await thread.setAppliedTags([]);
-
             const resolvedTag = thread.parent.availableTags.find((tag) => tag.name.toLowerCase() === "resolved");
             if (!resolvedTag) {
-                await ctx.sendMessage({ content: "The 'resolved' tag is not available in this forum channel." });
+                await ctx.sendMessage({ content: ctx.locale("cmd.closethread.resolved") });
                 return;
             }
 
             await thread.setAppliedTags([resolvedTag.id]);
 
             const embed = new EmbedBuilder()
-                .setTitle("Thread Closed")
-                .setDescription(`Thread **${thread.name}** has been closed and archived.`)
+                .setTitle(ctx.locale("cmd.closethread.embed.title"))
+                .setDescription(ctx.locale("cmd.closethread.embed.description", { threadName: thread.name }))
                 .setTimestamp();
 
             await ctx.sendMessage({ embeds: [embed] });
@@ -56,8 +54,8 @@ export default class CloseThread extends Command {
         } catch (error) {
             console.error(`Error while closing the thread: ${thread.name}`, error);
             const errorEmbed = new EmbedBuilder()
-                .setTitle("Error")
-                .setDescription(`An error occurred while closing the thread: ${error.message}`)
+                .setTitle(ctx.locale("cmd.closethread.errorembed.title"))
+                .setDescription(ctx.locale("cmd.closethread.errorembed.description", { error: error.message }))
                 .setTimestamp();
             await ctx.sendMessage({ embeds: [errorEmbed] });
         }

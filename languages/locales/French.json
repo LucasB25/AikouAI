@@ -55,8 +55,19 @@
 			}
 		},
 		"closethread": {
-			"description": "Ferme le fil actuel, supprime les tags, applique le tag 'résolu' et archive le fil."
-		}
+			"description": "Ferme le fil actuel, supprime les tags, applique le tag 'résolu' et archive le fil.",
+			"forumchannel": "Cette commande ne peut être utilisée que dans un fil au sein d'un canal de forum.",
+			"allowedforumchannels": "Cette commande ne peut pas être utilisée dans ce canal de forum.",
+			"resolved": "Cette commande ne peut pas être utilisée dans ce canal de forum.",
+			"embed": {
+				"title": "Fil Fermé",
+				"description": "Le fil **`{threadName}`** a été fermé et archivé."
+			},
+			"errorembed": {
+				"title": "Erreur",
+				"description": "Une erreur s'est produite lors de la fermeture du fil : {error}"
+			}
+		}		
 	},
 	"buttons": {
 		"support": "Serveur de Support"

@@ -55,7 +55,18 @@
 			}
 		},
 		"closethread": {
-			"description": "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread."
+			"description": "Closes the current thread, removes tags, applies the 'resolved' tag, and archives the thread.",
+			"forumchannel": "This command can only be used in a thread within a forum channel.",
+			"allowedforumchannels": "This command cannot be used in this forum channel.",
+			"resolved": "This command cannot be used in this forum channel.",
+			"embed": {
+				"title": "Thread Closed",
+				"description": "Thread **`{threadName}`** has been closed and archived."
+			},
+			"errorembed": {
+				"title": "Error",
+				"description": "n error occurred while closing the thread: {error}"
+			}
 		}
 	},
 	"buttons": {
