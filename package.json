@@ -60,7 +60,7 @@
         "discord.js": "^14.15.3",
         "dotenv": "^16.4.5",
         "i18n": "^0.15.1",
-        "replicate": "^0.32.0",
+        "replicate": "^0.34.0",
         "signale": "^1.4.0",
         "undici": "^6.19.4"
     }
