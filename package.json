@@ -27,7 +27,7 @@
         "@types/i18n": "^0.13.12",
         "@types/node": "^20.14.12",
         "@types/signale": "^1.4.7",
-        "prisma": "^5.17.0",
+        "prisma": "^6.0.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.5.4"
     },
@@ -55,7 +55,7 @@
     "dependencies": {
         "@google/generative-ai": "^0.16.0",
         "@napi-rs/canvas": "^0.1.53",
-        "@prisma/client": "^5.17.0",
+        "@prisma/client": "^6.0.0",
         "axios": "^1.7.2",
         "discord.js": "^14.15.3",
         "dotenv": "^16.4.5",
