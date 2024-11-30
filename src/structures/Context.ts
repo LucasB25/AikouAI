@@ -16,7 +16,7 @@ import {
     type PartialDMChannel,
     type TextChannel,
     type User,
-    type PartialGroupDMChannel, // Import PartialGroupDMChannel if needed
+    type PartialGroupDMChannel,
 } from "discord.js";
 import { T } from "./I18n.js";
 import type { Bot } from "./index.js";
@@ -29,7 +29,7 @@ export default class Context {
     public channelId: string;
     public client: Bot;
     public author: User | null;
-    public channel: PartialDMChannel | GuildTextBasedChannel | TextChannel | DMChannel | PartialGroupDMChannel | null = null; // Updated to include PartialGroupDMChannel
+    public channel: PartialDMChannel | GuildTextBasedChannel | TextChannel | DMChannel | PartialGroupDMChannel | null = null;
     public guild: Guild | null;
     public createdAt: Date;
     public createdTimestamp: number;
@@ -125,6 +125,6 @@ function isMessagePayload(content: any): content is MessagePayload {
 }
 
 /**
- * The Context.ts file was created by dawgcodes
+ * The Context.ts file was created by Appujet
  */
 
