@@ -23,13 +23,13 @@
     },
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
-        "@biomejs/biome": "^1.8.3",
+        "@biomejs/biome": "^1.9.4",
         "@types/i18n": "^0.13.12",
-        "@types/node": "^20.14.12",
+        "@types/node": "^22.10.1",
         "@types/signale": "^1.4.7",
-        "prisma": "^5.17.0",
+        "prisma": "^6.0.0",
         "ts-node": "^10.9.2",
-        "typescript": "^5.5.4"
+        "typescript": "^5.7.2"
     },
     "keywords": [
         "discord",
@@ -53,15 +53,15 @@
         "underlineLabel": true
     },
     "dependencies": {
-        "@google/generative-ai": "^0.16.0",
-        "@napi-rs/canvas": "^0.1.53",
-        "@prisma/client": "^5.17.0",
-        "axios": "^1.7.2",
-        "discord.js": "^14.15.3",
+        "@google/generative-ai": "^0.21.0",
+        "@napi-rs/canvas": "^0.1.64",
+        "@prisma/client": "^6.0.0",
+        "axios": "^1.7.8",
+        "discord.js": "^14.16.3",
         "dotenv": "^16.4.5",
         "i18n": "^0.15.1",
-        "replicate": "^0.32.0",
+        "replicate": "^1.0.1",
         "signale": "^1.4.0",
-        "undici": "^6.19.4"
+        "undici": "^7.0.0"
     }
 }

@@ -1,11 +1,11 @@
-import { Locale } from "discord.js";
+import { Locale } from 'discord.js';
 
 export enum Language {
-    EnglishUS = "EnglishUS",
-    French = "French",
+	EnglishUS = 'EnglishUS',
+	French = 'French',
 }
 
 export const LocaleFlags = {
-    [Locale.EnglishUS]: "🇺🇸",
-    [Locale.French]: "🇫🇷",
+	[Locale.EnglishUS]: '🇺🇸',
+	[Locale.French]: '🇫🇷',
 };
