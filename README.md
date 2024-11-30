@@ -87,19 +87,19 @@ GEMINI_MODEL=gemini-1.5-flash
 5. generate the prisma client
 
 ```bash
-npm run prisma:push
+npm run db:push
 ```
 
 Run the migrations (Only if you want to migrate your database)
 
 ```bash
-npm run prisma:migrate
+npm run db:migrate
 ```
 
 6. Run the bot:
 
 ```bash
-npm start
+npm run start
 ```
 
 ## 📜 Contributing

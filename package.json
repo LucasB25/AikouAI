@@ -11,8 +11,8 @@
         "clean:linux": "rm -rf dist",
         "lint": "biome lint --write src/",
         "format": "biome format --write src/",
-        "prisma:push": "npx prisma db push",
-        "prisma:migrate": "npx prisma migrate dev --name init"
+        "db:push": "npx prisma db push",
+        "db:migrate": "npx prisma migrate dev --name init"
     },
     "repository": {
         "type": "git",

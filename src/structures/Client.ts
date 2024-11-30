@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { initI18n, T, i18n, localization } from './I18n.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import {
@@ -19,6 +20,9 @@ import config from '../config.js';
 import ServerData from '../database/server.js';
 import { Canvas } from './Canvas.js';
 import Logger from './Logger.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default class Bot extends Client {
 	public config = config;

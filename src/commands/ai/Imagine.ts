@@ -65,8 +65,8 @@ export default class Imagine extends Command {
 			})) as string[];
 
 			const rowImg = await client.canvas.mergeImages({
-				width: 1000,
-				height: 1000,
+				width: 1024,
+				height: 1024,
 				images: prediction,
 			});
 
