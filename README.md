@@ -18,7 +18,7 @@
   <p align="center">AikouAI and TypeScript.
     <br />
     <br />
-        <a href="https://discord.gg/AhUJa2kdAr">Server Support</a>
+        <a href="https://discord.gg/nvcznzhkTF">Server Support</a>
     ·
     <a href="https://github.com/LucasB25/AikouAI/issues">Report Bug & Request Feature</a>
   </p>
