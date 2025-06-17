@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/LucasB25/AikouAI#readme",
     "devDependencies": {
-        "@biomejs/biome": "^1.9.4",
+        "@biomejs/biome": "^2.0.0",
         "@types/i18n": "^0.13.12",
         "@types/node": "^22.10.1",
         "@types/signale": "^1.4.7",
