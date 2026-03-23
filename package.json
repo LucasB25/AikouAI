@@ -29,7 +29,7 @@
         "@types/signale": "^1.4.7",
         "prisma": "^6.0.0",
         "ts-node": "^10.9.2",
-        "typescript": "^5.7.2"
+        "typescript": "^6.0.0"
     },
     "keywords": [
         "discord",
